@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Boote>
+    <Boot id="123">
+        <Verliehen>ja</Verliehen>
+        <AusleihDatum>20/12/2023</AusleihDatum>
+        <rueckhgabedatum>31/01/2024</rueckhgabedatum>
+        <kundenname>Thomas Fidorin</kundenname>
+    </Boot>
+</Boote>
