@@ -99,6 +99,8 @@ public class Data {
             if (nodeList.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 Element el = (Element) nodeList.item(i);
                 System.out.println(el);
+                String id = el.getAttributes().item(0).toString().substring(4, el.getAttributes().item(0).toString().length()-1);
+                String verliehen;
                 Boot boot;
             }
         }
