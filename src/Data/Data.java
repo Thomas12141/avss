@@ -2,6 +2,7 @@ package Data;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -13,47 +14,75 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
 
 public class Data {
 
     static String pattern = "dd/MM/yyyy";
     static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    static File xmlFile = new File("myXML.xml");
 
-    public static void main(String[] args) throws ParserConfigurationException, TransformerException {
+    public static void addNewElement(String id, String verliehen, String ausleihdatum, String rueckhgabedatum,
+                                     String kundennname) throws ParserConfigurationException, IOException, SAXException, TransformerException {
 
-        File xmlFile = new File("myXML.xml");
         DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        Document document = builder.newDocument();
+        Document document = builder.parse(xmlFile);
 
-        Element boote = document.createElement("Boote");
-        document.appendChild(boote);
+        Element root = document.getDocumentElement();
 
         Element boot = document.createElement("Boot");
-        boot.setAttribute("id", "123");
-        boote.appendChild(boot);
+        boot.setAttribute("ID", id);
+        boot.setIdAttribute("ID", true);
+        root.appendChild(boot);
 
-        Element entliehen = document.createElement("Verliehen");
-        entliehen.appendChild(document.createTextNode("ja"));
-        boot.appendChild(entliehen);
+        Element verliehenElement = document.createElement("Verliehen");
+        verliehenElement.appendChild(document.createTextNode(verliehen));
+        boot.appendChild(verliehenElement);
 
-        Element ausleihdatum = document.createElement("AusleihDatum");
-        ausleihdatum.appendChild(document.createTextNode(simpleDateFormat.format(new Date(2023-1900, 11, 20)).toString()));
-        boot.appendChild(ausleihdatum);
+        Element ausleihdatumDatumElement = document.createElement("Ausleihdatum");
+        ausleihdatumDatumElement.appendChild(document.createTextNode(ausleihdatum));
+        boot.appendChild(ausleihdatumDatumElement);
 
-        Element Rueckhgabedatum = document.createElement("rueckhgabedatum");
-        Rueckhgabedatum.appendChild(document.createTextNode(simpleDateFormat.format(new Date(2023-1900, 12, 31)).toString()));
-        boot.appendChild(Rueckhgabedatum);
+        Element rueckgabeDatumElement = document.createElement("Rueckgabedatum");
+        rueckgabeDatumElement.appendChild(document.createTextNode(rueckhgabedatum));
+        boot.appendChild(rueckgabeDatumElement);
 
-        Element Kundenname = document.createElement("kundenname");
-        Kundenname.appendChild(document.createTextNode("Thomas Fidorin"));
-        boot.appendChild(Kundenname);
+        Element kundennameElement = document.createElement("Kundenname");
+        kundennameElement.appendChild(document.createTextNode(kundennname));
+        boot.appendChild(kundennameElement);
+
 
         DOMSource domSource = new DOMSource(document);
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        //transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         StreamResult result = new StreamResult(xmlFile);
         transformer.transform(domSource, result);
+
+
+    }
+
+    public static void deleteElement(String id) throws ParserConfigurationException, IOException, SAXException, TransformerException {
+        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document document = builder.parse(xmlFile);
+
+        NodeList bootList = document.getElementsByTagName("Boot");
+
+        for (int i = 0; i < bootList.getLength(); i++) {
+            Element bootElement = (Element) bootList.item(i);
+            String elementId = bootElement.getAttribute("ID");
+
+            if (elementId.equals(id)) {
+                bootElement.getParentNode().removeChild(bootElement);
+
+                DOMSource domSource = new DOMSource(document);
+                Transformer transformer = TransformerFactory.newInstance().newTransformer();
+                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                StreamResult result = new StreamResult(xmlFile);
+                transformer.transform(domSource, result);
+                return;
+            }
+        }
+    }
+    public static void main(String[] args) throws ParserConfigurationException, TransformerException, IOException, SAXException {
+        addNewElement("510", "ja", "14125", "35235", "thah");
     }
 }
