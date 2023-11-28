@@ -1,7 +1,9 @@
 package Data;
 
+import Boot.Boot;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -13,7 +15,10 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Data {
 
@@ -53,7 +58,7 @@ public class Data {
 
         DOMSource domSource = new DOMSource(document);
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
-        //transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         StreamResult result = new StreamResult(xmlFile);
         transformer.transform(domSource, result);
 
@@ -82,7 +87,25 @@ public class Data {
             }
         }
     }
+
+    public static ArrayList<Boot> getAllElements() throws ParserConfigurationException, IOException, SAXException {
+        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document document = builder.parse(xmlFile);
+        Element element = document.getDocumentElement();
+        NodeList nodeList = element.getChildNodes();
+        ArrayList<Boot> list = new ArrayList<>();
+        int lenght = nodeList.getLength();
+        for (int i = 0; i < lenght; i++) {
+            if (nodeList.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                Element el = (Element) nodeList.item(i);
+                System.out.println(el);
+                Boot boot;
+            }
+        }
+        return list;
+    }
     public static void main(String[] args) throws ParserConfigurationException, TransformerException, IOException, SAXException {
-        addNewElement("510", "ja", "14125", "35235", "thah");
+        //addNewElement("510", "ja", "14125", "35235", "thah");
+        ArrayList list = getAllElements();
     }
 }
