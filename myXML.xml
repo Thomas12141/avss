@@ -1,9 +1,92 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Boote>
-    <Boot ID="520">
+                        
+    
+    
+    
+    
+    <Boot ID="510">
+                                                
+        
+        
+        
+        
         <Verliehen>ja</Verliehen>
+                                                
+        
+        
+        
+        
         <Ausleihdatum>14125</Ausleihdatum>
+                                                
+        
+        
+        
+        
         <Rueckgabedatum>35235</Rueckgabedatum>
+                                                
+        
+        
+        
+        
         <Kundenname>thah</Kundenname>
+                                            
+    
+    
+    
+    
+    </Boot>
+                    
+    
+    
+    
+    
+    <Boot ID="520">
+                                        
+        
+        
+        
+        <Verliehen>ja</Verliehen>
+                                        
+        
+        
+        
+        <Ausleihdatum>14125</Ausleihdatum>
+                                        
+        
+        
+        
+        <Rueckgabedatum>35235</Rueckgabedatum>
+                                        
+        
+        
+        
+        <Kundenname>thah</Kundenname>
+                                    
+    
+    
+    
+    </Boot>
+            
+    
+    <Boot ID="530">
+                        
+        
+        <Verliehen>ja</Verliehen>
+                        
+        
+        <Ausleihdatum>14125</Ausleihdatum>
+                        
+        
+        <Rueckgabedatum>35235</Rueckgabedatum>
+                        
+        
+        <Kundenname>thah</Kundenname>
+                    
+    
+    </Boot>
+    
+    <Boot ID="1000">
+        <Verliehen>nein</Verliehen>
     </Boot>
 </Boote>
