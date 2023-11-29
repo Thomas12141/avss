@@ -128,7 +128,7 @@ public class Data {
                 }else {
 
                     Boot boot = new Boot(id);
-                    verliehenList.add(boot);
+                    nichtVerliehenList.add(boot);
                 }
             }
         }

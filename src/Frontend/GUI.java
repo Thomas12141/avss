@@ -81,7 +81,6 @@ public class GUI extends JFrame {
 
         this.add(jPanel);
 
-
         aktualisieren.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
