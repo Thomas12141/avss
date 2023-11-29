@@ -35,8 +35,50 @@ public class GUI extends JFrame {
 
         JPanel jPanel = new JPanel();
         jPanel.setLayout(new FlowLayout());
+
+        Dimension textFieldDimension = new Dimension(100, 25);
+
+        JLabel idLabel = new JLabel("Id: ");
+        idLabel.setPreferredSize(new Dimension(20, 25));
+        jPanel.add(idLabel);
+
+        JTextField idTextField = new JTextField();
+        idTextField.setPreferredSize(textFieldDimension);
+        jPanel.add(idTextField);
+
+        JLabel ausleihdatumLabel = new JLabel("Ausleihdatum:");
+        ausleihdatumLabel.setPreferredSize(new Dimension(90, 25));
+        jPanel.add(ausleihdatumLabel);
+
+        JTextField ausleihdatumTextField = new JTextField();
+        ausleihdatumTextField.setPreferredSize(textFieldDimension);
+        jPanel.add(ausleihdatumTextField);
+
+        JLabel rueckgabedatumLabel = new JLabel("Rueckgabedatum:");
+        rueckgabedatumLabel.setPreferredSize(new Dimension(110, 25));
+        jPanel.add(rueckgabedatumLabel);
+
+        JTextField rueckgabedatumTextField = new JTextField();
+        rueckgabedatumTextField.setPreferredSize(textFieldDimension);
+        jPanel.add(rueckgabedatumTextField);
+
+        JLabel kundennameLabel = new JLabel("Kundenname:");
+        kundennameLabel.setPreferredSize(new Dimension(85, 25));
+        jPanel.add(kundennameLabel);
+
+        JTextField kundennameTextField = new JTextField();
+        kundennameTextField.setPreferredSize(textFieldDimension);
+        jPanel.add(kundennameTextField);
+
+        JButton hinzufuegen = new JButton("hinzufügen");
+        jPanel.add(hinzufuegen);
+
+        JButton loeschen = new JButton("löschen");
+        jPanel.add(loeschen);
+
         JButton aktualisieren = new JButton("aktualisieren");
         jPanel.add(aktualisieren);
+
         this.add(jPanel);
 
 
