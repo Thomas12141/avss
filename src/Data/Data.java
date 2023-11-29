@@ -15,15 +15,10 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Data {
 
-    static String pattern = "dd/MM/yyyy";
-    static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     static File xmlFile = new File("myXML.xml");
 
     public static void addNewElement(String id) throws ParserConfigurationException, IOException, SAXException, TransformerException {

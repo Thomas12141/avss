@@ -57,9 +57,9 @@ public class Boot {
     @Override
     public String toString() {
         if(verliehen.equals("ja"))
-            return "Id: " + id + "\t" + "Kunde: " + kundennname + "\t" + "Verliehen am: " + ausleihdatum + "\t" + "bis: " + rueckhgabedatum + ".";
+            return "Id: " + id + "\t\t" + "Kunde: " + kundennname + "\t\t" + "Verliehen am: " + ausleihdatum + "\t\t" + "bis: " + rueckhgabedatum + ".";
         else
-            return "Id: " + id + "\t" + "Bereit um zu leihen.";
+            return "Id: " + id + "\t\t" + "Bereit um zu leihen.";
     }
 
     @Override
