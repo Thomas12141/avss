@@ -15,6 +15,27 @@ public class BootRepository{
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+    public ArrayList<String> getAllRented() throws ParserConfigurationException, IOException, SAXException {
+        ArrayList<Boot> boats = convertToBoats(Data.getAllElements());
+        ArrayList<String> result = new ArrayList<>();
+        for (Boot boat: boats) {
+            if(boat.getVerliehen().equals("ja")){
+                result.add(boat.toString());
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<String> getAllNotRented() throws ParserConfigurationException, IOException, SAXException {
+        ArrayList<Boot> boats = convertToBoats(Data.getAllElements());
+        ArrayList<String> result = new ArrayList<>();
+        for (Boot boat: boats) {
+            if(boat.getVerliehen().equals("nein")){
+                result.add(boat.toString());
+            }
+        }
+        return result;
+    }
     public void addNewBootToList(String id) throws ParserConfigurationException, IOException, TransformerException, SAXException {
 
         if(id == null) throw new NullPointerException("Boat object is missing required information.");
