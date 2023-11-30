@@ -28,7 +28,7 @@ public class BootRepository{
     public boolean idExists(String id) throws ParserConfigurationException, IOException, SAXException {
 
         Boot bootToFind = new Boot(id);
-        ArrayList<Boot> allBoote = Data.getAllElements();
+        ArrayList<String> allBoote = Data.getAllElements();
 
         for (Boot boot : allBoote) {
             if (boot.equals(bootToFind)) {
@@ -55,9 +55,9 @@ public class BootRepository{
         return true;
     }
 
-    public void addBootToList(String id, String verliehen, String ausleihdatumStr, String rueckgabedatumStr, String kundennname) throws Exception {
+    public void addBootToList(String id, String ausleihdatumStr, String rueckgabedatumStr, String kundennname) throws Exception {
 
-        if(id == null || verliehen == null) throw new NullPointerException("Boat object is missing required information.");
+        if(id.isEmpty()) throw new NullPointerException("Boat object is missing required information.");
 
         if(idExists(id)) throw new IllegalArgumentException("ID already exists. Please choose a different ID.");
 
@@ -68,18 +68,45 @@ public class BootRepository{
 
         if(!checkAusleihdatumKleinerRueckgabedatum(ausleihdatum, rueckgabedatum)) throw new Exception("Error in date indication: 'Rueckgabedatum' < 'Ausleihdatum'.");
 
-        Data.addNewElement(id, verliehen, ausleihdatumStr, rueckgabedatumStr, kundennname);
+        Data.addNewElement(id, ausleihdatumStr, rueckgabedatumStr, kundennname);
     }
 
-    public void deleteBootFromList(String id) throws ParserConfigurationException, IOException, TransformerException, SAXException {
-
+    public void deleteBootFromList(String id) throws ParserConfigurationException, IOException, TransformerException, SAXException, IllegalAccessException {
+        ArrayList<Boot> boats = convertToBoats(Data.getAllElements());
+        Boot boat = null;
+        for (Boot toPick:boats) {
+            if(toPick.getId().equals(id)){
+                boat = toPick;
+                break;
+            }
+        }
+        if(boat==null){
+            throw new NullPointerException("This id dont exist.");
+        }
+        if(boat.getVerliehen().equals("ja")){
+            throw new IllegalAccessException("Rented boats cannot be deleted.");
+        }
         Data.deleteElement(id);
     }
 
     public void bootListeAusgeben(String id, String verliehen) throws ParserConfigurationException, IOException, SAXException {
 
-        if(id == null || verliehen == null) throw new NullPointerException("Boat object is missing required information.");
+        if(id.isEmpty() || verliehen.isEmpty()) throw new NullPointerException("Boat object is missing required information.");
 
         Data.getAllElements();
+    }
+
+    private ArrayList<Boot> convertToBoats(ArrayList<String> strings){
+        ArrayList<Boot> boats = new ArrayList<>();
+        for (String string: strings) {
+            String[] arr = string.split(";");
+            if(arr.length==1){
+                Boot boat = new Boot(arr[0]);
+                boats.add(boat);
+            }else {
+                Boot boat = new Boot(arr[0], arr[1], arr[2], arr[3]);
+            }
+        }
+        return boats;
     }
 }

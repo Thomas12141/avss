@@ -3,9 +3,9 @@ public class Boot {
     private String id, verliehen, ausleihdatum, rueckhgabedatum, kundennname;
 
 
-    public Boot(String id, String verliehen, String ausleihdatum, String rueckhgabedatum, String kundennname) {
+    public Boot(String id,String ausleihdatum, String rueckhgabedatum, String kundennname) {
         this.id = id;
-        this.verliehen = verliehen;
+        this.verliehen = "ja";
         this.ausleihdatum = ausleihdatum;
         this.rueckhgabedatum = rueckhgabedatum;
         this.kundennname = kundennname;

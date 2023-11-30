@@ -1,11 +1,11 @@
 package Frontend;
 
-import Data.Data;
 import org.xml.sax.SAXException;
-import Boot.*;
+import Logic.BootRepository;
 
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +29,12 @@ public class GUI extends JFrame {
         listComponents.setModel(model);
         listComponents.setPreferredSize(new Dimension(1260, 800));
 
+        JButton list1 = new JButton("list1");
+        this.add(list1);
+
+        JButton list2 = new JButton("list2");
+        this.add(list2);
+
         this.setLayout(new FlowLayout());
         this.add(listComponents);
         this.setResizable(false);
@@ -37,6 +43,12 @@ public class GUI extends JFrame {
         jPanel.setLayout(new FlowLayout());
 
         Dimension textFieldDimension = new Dimension(100, 25);
+
+
+
+        JLabel blank1 = new JLabel("    ");
+        blank1.setPreferredSize(new Dimension(90, 25));
+        jPanel.add(blank1);
 
         JLabel idLabel = new JLabel("Id: ");
         idLabel.setPreferredSize(new Dimension(20, 25));
@@ -79,27 +91,62 @@ public class GUI extends JFrame {
         JButton aktualisieren = new JButton("aktualisieren");
         jPanel.add(aktualisieren);
 
+        JLabel blank2 = new JLabel("    ");
+        blank2.setPreferredSize(new Dimension(90, 25));
+        jPanel.add(blank2);
+
         this.add(jPanel);
 
+        JLabel error = new JLabel("");
+        this.add(error);
         aktualisieren.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<Boot> boats = null;
-                try {
-                    boats = Data.getAllElements();
-                } catch (ParserConfigurationException ex) {
-                    throw new RuntimeException(ex);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                } catch (SAXException ex) {
-                    throw new RuntimeException(ex);
+                model.clear();
+                BootRepository bootRepository = new BootRepository();
+                ArrayList<String> boats = null;
+                String prefix = "<html><pre>";
+                String suffix = "</pre></html>";
+            }
+        });
+        hinzufuegen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BootRepository bootRepository = new BootRepository();
+                String id = idTextField.getText();
+                String ausleihDatum = ausleihdatumTextField.getText();
+                String rueckgabeDatum = rueckgabedatumTextField.getText();
+                String kundenName = kundennameTextField.getText();
+                if(ausleihDatum.isEmpty()&&rueckgabeDatum.isEmpty()&&kundenName.isEmpty()){
+                    try {
+                        bootRepository.addNewBootToList(id);
+                    } catch (ParserConfigurationException | IOException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (TransformerException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (SAXException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }else {
+                    try {
+                        bootRepository.addBootToList(id, ausleihDatum, rueckgabeDatum, kundenName);
+                    } catch (Exception ex) {
+                        error.setText(ex.getMessage());
+                    }
                 }
-                for (Boot boat: boats) {
-                    StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append("<html><pre>");
-                    stringBuilder.append(boat.toString());
-                    stringBuilder.append("</pre></html>");
-                    model.addElement(stringBuilder.toString());
+            }
+        });
+
+        loeschen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BootRepository bootRepository = new BootRepository();
+                String id = idTextField.getText();
+                try {
+                    bootRepository.deleteBootFromList(id);
+                } catch (ParserConfigurationException | TransformerException | IOException | SAXException |
+                         IllegalAccessException | NullPointerException ex) {
+                    error.setText(ex.getMessage());
                 }
             }
         });
