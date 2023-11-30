@@ -1,4 +1,4 @@
-package Boot;
+package Logic;
 public class Boot {
     private String id, verliehen, ausleihdatum, rueckhgabedatum, kundennname;
 

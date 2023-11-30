@@ -1,7 +1,6 @@
 package Logic;
 
 import Data.Data;
-import Boot.Boot;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
