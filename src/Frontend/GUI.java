@@ -1,5 +1,6 @@
 package Frontend;
 
+import Logic.Boot;
 import org.xml.sax.SAXException;
 import Logic.BootRepository;
 
@@ -29,10 +30,10 @@ public class GUI extends JFrame {
         listComponents.setModel(model);
         listComponents.setPreferredSize(new Dimension(1260, 800));
 
-        JButton list1 = new JButton("list1");
+        JButton list1 = new JButton("Verliehene Boote");
         this.add(list1);
 
-        JButton list2 = new JButton("list2");
+        JButton list2 = new JButton("Nicht verliehene Boote");
         this.add(list2);
 
         this.setLayout(new FlowLayout());
@@ -88,9 +89,6 @@ public class GUI extends JFrame {
         JButton loeschen = new JButton("löschen");
         jPanel.add(loeschen);
 
-        JButton aktualisieren = new JButton("aktualisieren");
-        jPanel.add(aktualisieren);
-
         JLabel blank2 = new JLabel("    ");
         blank2.setPreferredSize(new Dimension(90, 25));
         jPanel.add(blank2);
@@ -99,16 +97,52 @@ public class GUI extends JFrame {
 
         JLabel error = new JLabel("");
         this.add(error);
-        aktualisieren.addActionListener(new ActionListener() {
+        list1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.clear();
                 BootRepository bootRepository = new BootRepository();
-                ArrayList<String> boats = null;
+                ArrayList<Boot> list;
+                try {
+                    list = bootRepository.getAllRented();
+                } catch (ParserConfigurationException ex) {
+                    throw new RuntimeException(ex);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                } catch (SAXException ex) {
+                    throw new RuntimeException(ex);
+                }
                 String prefix = "<html><pre>";
                 String suffix = "</pre></html>";
+                for (Boot string: list) {
+                    model.addElement(prefix + string.toString() + suffix);
+                }
             }
         });
+
+        list2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.clear();
+                BootRepository bootRepository = new BootRepository();
+                ArrayList<Boot> list;
+                try {
+                    list = bootRepository.getAllNotRented();
+                } catch (ParserConfigurationException ex) {
+                    throw new RuntimeException(ex);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                } catch (SAXException ex) {
+                    throw new RuntimeException(ex);
+                }
+                String prefix = "<html><pre>";
+                String suffix = "</pre></html>";
+                for (Boot boot: list) {
+                    model.addElement(prefix + boot.toString() + suffix);
+                }
+            }
+        });
+
         hinzufuegen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

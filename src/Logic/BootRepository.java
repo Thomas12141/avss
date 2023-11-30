@@ -1,6 +1,7 @@
 package Logic;
 
-import Data.Data;
+import Data.DataList1;
+import Data.DataList2;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -15,23 +16,23 @@ public class BootRepository{
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public ArrayList<String> getAllRented() throws ParserConfigurationException, IOException, SAXException {
-        ArrayList<Boot> boats = convertToBoats(Data.getAllElements());
-        ArrayList<String> result = new ArrayList<>();
+    public ArrayList<Boot> getAllRented() throws ParserConfigurationException, IOException, SAXException {
+        ArrayList<Boot> boats = convertToBoats(DataList1.getAllElements());
+        ArrayList<Boot> result = new ArrayList<>();
         for (Boot boat: boats) {
             if(boat.getVerliehen().equals("ja")){
-                result.add(boat.toString());
+                result.add(boat);
             }
         }
         return result;
     }
 
-    public ArrayList<String> getAllNotRented() throws ParserConfigurationException, IOException, SAXException {
-        ArrayList<Boot> boats = convertToBoats(Data.getAllElements());
-        ArrayList<String> result = new ArrayList<>();
+    public ArrayList<Boot> getAllNotRented() throws ParserConfigurationException, IOException, SAXException {
+        ArrayList<Boot> boats = convertToBoats(DataList1.getAllElements());
+        ArrayList<Boot> result = new ArrayList<>();
         for (Boot boat: boats) {
             if(boat.getVerliehen().equals("nein")){
-                result.add(boat.toString());
+                result.add(boat);
             }
         }
         return result;
@@ -42,13 +43,13 @@ public class BootRepository{
 
         if(idExists(id)) throw new IllegalArgumentException("ID already exists. Please choose a different ID.");
 
-        Data.addNewElement(id);
+        DataList2.addNewElement(id);
     }
 
     public boolean idExists(String id) throws ParserConfigurationException, IOException, SAXException {
 
         Boot bootToFind = new Boot(id);
-        ArrayList<Boot> allBoote = convertToBoats(Data.getAllElements());
+        ArrayList<Boot> allBoote = convertToBoats(DataList1.getAllElements());
 
         for (Boot boot : allBoote) {
             if (boot.equals(bootToFind)) {
@@ -88,11 +89,11 @@ public class BootRepository{
 
         if(!checkAusleihdatumKleinerRueckgabedatum(ausleihdatum, rueckgabedatum)) throw new Exception("Error in date indication: 'Rueckgabedatum' < 'Ausleihdatum'.");
 
-        Data.addNewElement(id, ausleihdatumStr, rueckgabedatumStr, kundennname);
+        DataList1.addNewElement(id, ausleihdatumStr, rueckgabedatumStr, kundennname);
     }
 
     public void deleteBootFromList(String id) throws ParserConfigurationException, IOException, TransformerException, SAXException, IllegalAccessException {
-        ArrayList<Boot> boats = convertToBoats(Data.getAllElements());
+        ArrayList<Boot> boats = convertToBoats(DataList1.getAllElements());
         Boot boat = null;
         for (Boot toPick:boats) {
             if(toPick.getId().equals(id)){
@@ -106,14 +107,14 @@ public class BootRepository{
         if(boat.getVerliehen().equals("ja")){
             throw new IllegalAccessException("Rented boats cannot be deleted.");
         }
-        Data.deleteElement(id);
+        DataList1.deleteElement(id);
     }
 
     public void bootListeAusgeben(String id, String verliehen) throws ParserConfigurationException, IOException, SAXException {
 
         if(id.isEmpty() || verliehen.isEmpty()) throw new NullPointerException("Boat object is missing required information.");
 
-        Data.getAllElements();
+        DataList1.getAllElements();
     }
 
     private ArrayList<Boot> convertToBoats(ArrayList<String> strings){
@@ -125,6 +126,7 @@ public class BootRepository{
                 boats.add(boat);
             }else {
                 Boot boat = new Boot(arr[0], arr[1], arr[2], arr[3]);
+                boats.add(boat);
             }
         }
         return boats;

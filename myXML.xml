@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Boote>
-                                    
+                    
     
     
     
-    
-    
-    
-    
-                            
-    
-    
-    
-    
-    
-    
-    
-    <Boot ID="520">
+    <Boot ID="1000">
                                                                 
         
         
@@ -24,31 +12,7 @@
         
         
         
-        <Verliehen>ja</Verliehen>
-                                                                
-        
-        
-        
-        
-        
-        
-        <Ausleihdatum>14125</Ausleihdatum>
-                                                                
-        
-        
-        
-        
-        
-        
-        <Rueckgabedatum>35235</Rueckgabedatum>
-                                                                
-        
-        
-        
-        
-        
-        
-        <Kundenname>thah</Kundenname>
+        <Verliehen>nein</Verliehen>
                                                             
     
     
@@ -57,12 +21,35 @@
     
     
     </Boot>
+                            
+    
+    
+    
+    
+    
+    
+    <Boot ID="12412">
+                                                        
+        
+        
+        
+        
+        
+        <Verliehen>nein</Verliehen>
+                                                    
+    
+    
+    
+    
+    
+    </Boot>
                         
     
     
     
     
-    <Boot ID="530">
+    
+    <Boot ID="125666">
                                                 
         
         
@@ -74,34 +61,47 @@
         
         
         
-        <Ausleihdatum>14125</Ausleihdatum>
+        <Ausleihdatum>12/07/1222</Ausleihdatum>
                                                 
         
         
         
         
-        <Rueckgabedatum>35235</Rueckgabedatum>
+        <Rueckgabedatum>13/07/1222</Rueckgabedatum>
                                                 
         
         
         
         
-        <Kundenname>thah</Kundenname>
+        <Kundenname>Elli</Kundenname>
                                             
     
     
     
     
     </Boot>
-                
+                    
+
     
     
     
-    <Boot ID="1000">
+    <Boot ID="124126">
                                 
         
         
-        <Verliehen>nein</Verliehen>
+        <Verliehen>ja</Verliehen>
+                                
+        
+        
+        <Ausleihdatum>30/11/2023</Ausleihdatum>
+                                
+        
+        
+        <Rueckgabedatum>01/12/2023</Rueckgabedatum>
+                                
+        
+        
+        <Kundenname>Pert</Kundenname>
                             
     
     
@@ -109,25 +109,27 @@
             
     
     
-    <Boot ID="12412">
+    <Boot ID="12415">
                         
         
-        <Verliehen>nein</Verliehen>
+        <Verliehen>ja</Verliehen>
+                        
+        
+        <Ausleihdatum>30/11/2023</Ausleihdatum>
+                        
+        
+        <Rueckgabedatum>01/12/2023</Rueckgabedatum>
+                        
+        
+        <Kundenname>Pert;</Kundenname>
                     
     
     </Boot>
-        
-    
-    <Boot ID="125666">
-                
+
+    <Boot ID="124154">
         <Verliehen>ja</Verliehen>
-                
-        <Ausleihdatum>12/07/1222</Ausleihdatum>
-                
-        <Rueckgabedatum>13/07/1222</Rueckgabedatum>
-                
-        <Kundenname>Elli</Kundenname>
-            
+        <Ausleihdatum>30/11/2023</Ausleihdatum>
+        <Rueckgabedatum>01/12/2023</Rueckgabedatum>
+        <Kundenname>Pert</Kundenname>
     </Boot>
-    
 </Boote>
