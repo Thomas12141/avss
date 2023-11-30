@@ -28,7 +28,7 @@ public class BootRepository{
     public boolean idExists(String id) throws ParserConfigurationException, IOException, SAXException {
 
         Boot bootToFind = new Boot(id);
-        ArrayList<String> allBoote = Data.getAllElements();
+        ArrayList<Boot> allBoote = convertToBoats(Data.getAllElements());
 
         for (Boot boot : allBoote) {
             if (boot.equals(bootToFind)) {
