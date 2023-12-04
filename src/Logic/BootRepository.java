@@ -43,7 +43,7 @@ public class BootRepository{
     }
     public void addNewBootToList(String id) throws ParserConfigurationException, IOException, TransformerException, SAXException {
 
-        if(!Pattern.compile(namePattern).matcher(id).matches()) throw new NullPointerException("Boat object is missing required information.");
+        if(!Pattern.compile(numberPattern).matcher(id).matches()) throw new NullPointerException("Boat object is missing required information.");
 
         if(idExists(id)) throw new IllegalArgumentException("ID already exists. Please choose a different ID.");
 
@@ -89,13 +89,13 @@ public class BootRepository{
 
     public void addBootToList(String id, String ausleihdatumStr, String rueckgabedatumStr, String kundennname) throws Exception {
 
-        if(!Pattern.compile(namePattern).matcher(id).matches()) throw new NullPointerException("Boat object is missing required information.");
+        if(!Pattern.compile(numberPattern).matcher(id).matches()) throw new NullPointerException("Boat object is missing required information.");
 
         if(idExists(id)) throw new IllegalArgumentException("ID already exists. Please choose a different ID.");
 
         if(!isValidDateFormat(ausleihdatumStr, rueckgabedatumStr)) throw new Exception("Invalid date format. Please use the date format 'dd/mm/yyyy'.");
 
-        if(Pattern.compile(namePattern).matcher(kundennname).matches()) throw new IllegalArgumentException("Name must consist only letters and blank spaces.");
+        if(!Pattern.compile(namePattern).matcher(kundennname).matches()) throw new IllegalArgumentException("Name must consist only letters and blank spaces.");
         LocalDate ausleihdatum = LocalDate.parse(ausleihdatumStr, formatter);
         LocalDate rueckgabedatum = LocalDate.parse(rueckgabedatumStr, formatter);
 

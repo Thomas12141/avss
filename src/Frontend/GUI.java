@@ -95,6 +95,7 @@ public class GUI extends JFrame {
         this.add(jPanel);
 
         JLabel error = new JLabel("");
+        error.setForeground(Color.red);
         this.add(error);
         list1.addActionListener(new ActionListener() {
             @Override
@@ -103,6 +104,7 @@ public class GUI extends JFrame {
                     @Override
                     public void run() {
                         try {
+                            error.setText("");
                             model.clear();
                             BootRepository bootRepository = new BootRepository();
                             ArrayList<VerlieheneBoote> list = bootRepository.getAllRented();
@@ -130,6 +132,7 @@ public class GUI extends JFrame {
                     @Override
                     public void run() {
                         try {
+                            error.setText("");
                             model.clear();
                             BootRepository bootRepository = new BootRepository();
                             ArrayList<NichtVerlieheneBoote> list = bootRepository.getAllNotRented();
@@ -157,13 +160,14 @@ public class GUI extends JFrame {
                     @Override
                     public void run() {
                         try {
+                            error.setText("");
                             BootRepository bootRepository = new BootRepository();
                             String id = idTextField.getText();
                             String ausleihDatum = ausleihdatumTextField.getText();
                             String rueckgabeDatum = rueckgabedatumTextField.getText();
                             String kundenName = kundennameTextField.getText();
                             if(ausleihDatum.isEmpty()&&rueckgabeDatum.isEmpty()&&kundenName.isEmpty()){
-
+                                bootRepository.addNewBootToList(id);
                             }else {
                                 try {
                                     bootRepository.addBootToList(id, ausleihDatum, rueckgabeDatum, kundenName);
@@ -171,7 +175,6 @@ public class GUI extends JFrame {
                                     error.setText(ex.getMessage());
                                 }
                             }
-                            bootRepository.addNewBootToList(id);
                         } catch (Exception ex) {
                             error.setText(ex.getMessage());
                         }
@@ -188,6 +191,7 @@ public class GUI extends JFrame {
                     @Override
                     public void run() {
                         try {
+                            error.setText("");
                             BootRepository bootRepository = new BootRepository();
                             String id = idTextField.getText();
                             bootRepository.deleteBootFromList(id);
