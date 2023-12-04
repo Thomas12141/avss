@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class GUI extends JFrame {
     public GUI() throws ParserConfigurationException, IOException, SAXException {
         super("Verleih");
-        this.setSize(1024,768);
+        this.setSize(1024,576);
         this.setLayout(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -27,9 +27,9 @@ public class GUI extends JFrame {
 
 
         JList<String> listComponents = new JList<>();
-        listComponents.setBounds(0,0,1024,368);
+        listComponents.setBounds(0,0,1024,400);
         listComponents.setModel(model);
-        listComponents.setPreferredSize(new Dimension(1004, 368));
+        listComponents.setPreferredSize(new Dimension(1004, 400));
 
         JButton list1 = new JButton("Verliehene Boote");
         this.add(list1);
