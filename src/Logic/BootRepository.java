@@ -16,10 +16,10 @@ public class BootRepository{
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public ArrayList<Boot> getAllRented() throws ParserConfigurationException, IOException, SAXException {
-        ArrayList<Boot> boats = convertToBoats(DataList1.getAllElements());
-        ArrayList<Boot> result = new ArrayList<>();
-        for (Boot boat: boats) {
+    public ArrayList<VerlieheneBoote> getAllRented() throws ParserConfigurationException, IOException, SAXException {
+        ArrayList<VerlieheneBoote> boats = convertToRentedBoats(DataList1.getAllElements());
+        ArrayList<VerlieheneBoote> result = new ArrayList<>();
+        for (VerlieheneBoote boat: boats) {
             if(boat.getVerliehen().equals("ja")){
                 result.add(boat);
             }
@@ -27,10 +27,10 @@ public class BootRepository{
         return result;
     }
 
-    public ArrayList<Boot> getAllNotRented() throws ParserConfigurationException, IOException, SAXException {
-        ArrayList<Boot> boats = convertToBoats(DataList1.getAllElements());
-        ArrayList<Boot> result = new ArrayList<>();
-        for (Boot boat: boats) {
+    public ArrayList<NichtVerlieheneBoote> getAllNotRented() throws ParserConfigurationException, IOException, SAXException {
+        ArrayList<NichtVerlieheneBoote> boats = convertToBoats(DataList2.getAllElements());
+        ArrayList<NichtVerlieheneBoote> result = new ArrayList<>();
+        for (NichtVerlieheneBoote boat: boats) {
             if(boat.getVerliehen().equals("nein")){
                 result.add(boat);
             }
@@ -48,10 +48,10 @@ public class BootRepository{
 
     public boolean idExists(String id) throws ParserConfigurationException, IOException, SAXException {
 
-        Boot bootToFind = new Boot(id);
-        ArrayList<Boot> allBoote = convertToBoats(DataList1.getAllElements());
+        NichtVerlieheneBoote bootToFind = new NichtVerlieheneBoote(id);
+        ArrayList<NichtVerlieheneBoote> allBoote = convertToBoats(DataList1.getAllElements());
 
-        for (Boot boot : allBoote) {
+        for (NichtVerlieheneBoote boot : allBoote) {
             if (boot.equals(bootToFind)) {
                 return true;
             }
@@ -65,7 +65,7 @@ public class BootRepository{
             LocalDate.parse(rueckgabedatumStr, formatter);
             return true;
         } catch (DateTimeParseException e) {
-            return false;           //Format ist inkorrekt
+            return false;
         }
     }
 
@@ -93,16 +93,16 @@ public class BootRepository{
     }
 
     public void deleteBootFromList(String id) throws ParserConfigurationException, IOException, TransformerException, SAXException, IllegalAccessException {
-        ArrayList<Boot> boats = convertToBoats(DataList1.getAllElements());
-        Boot boat = null;
-        for (Boot toPick:boats) {
+        ArrayList<NichtVerlieheneBoote> boats = convertToBoats(DataList1.getAllElements());
+        NichtVerlieheneBoote boat = null;
+        for (NichtVerlieheneBoote toPick:boats) {
             if(toPick.getId().equals(id)){
                 boat = toPick;
                 break;
             }
         }
         if(boat==null){
-            throw new NullPointerException("This id dont exist.");
+            throw new NullPointerException("This id does not exist.");
         }
         if(boat.getVerliehen().equals("ja")){
             throw new IllegalAccessException("Rented boats cannot be deleted.");
@@ -117,18 +117,30 @@ public class BootRepository{
         DataList1.getAllElements();
     }
 
-    private ArrayList<Boot> convertToBoats(ArrayList<String> strings){
-        ArrayList<Boot> boats = new ArrayList<>();
+    private ArrayList<NichtVerlieheneBoote> convertToBoats(ArrayList<String> strings){
+
+        ArrayList<NichtVerlieheneBoote> boats = new ArrayList<>();
         for (String string: strings) {
             String[] arr = string.split(";");
-            if(arr.length==1){
-                Boot boat = new Boot(arr[0]);
-                boats.add(boat);
-            }else {
-                Boot boat = new Boot(arr[0], arr[1], arr[2], arr[3]);
+            if(arr.length==1) {
+                NichtVerlieheneBoote boat = new NichtVerlieheneBoote(arr[0]);
                 boats.add(boat);
             }
         }
         return boats;
     }
+
+    private ArrayList<VerlieheneBoote> convertToRentedBoats(ArrayList<String> strings){
+
+        ArrayList<VerlieheneBoote> rentedBoats = new ArrayList<>();
+        for (String string: strings) {
+            String[] arr = string.split(";");
+            if(arr.length==4) {
+                VerlieheneBoote rentedBoat = new VerlieheneBoote(arr[0], arr[1], arr[2], arr[3]);
+                rentedBoats.add(rentedBoat);
+            }
+        }
+        return rentedBoats;
+    }
+
 }

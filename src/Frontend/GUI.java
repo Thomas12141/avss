@@ -1,6 +1,7 @@
 package Frontend;
 
-import Logic.Boot;
+import Logic.NichtVerlieheneBoote;
+import Logic.VerlieheneBoote;
 import org.xml.sax.SAXException;
 import Logic.BootRepository;
 
@@ -17,7 +18,8 @@ import java.util.ArrayList;
 public class GUI extends JFrame {
     public GUI() throws ParserConfigurationException, IOException, SAXException {
         super("Verleih");
-        this.setSize(1280,1024);
+        //this.setSize(1280,1024);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLayout(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -33,7 +35,7 @@ public class GUI extends JFrame {
         JButton list1 = new JButton("Verliehene Boote");
         this.add(list1);
 
-        JButton list2 = new JButton("Nicht verliehene Boote");
+        JButton list2 = new JButton("Verfügbare Boote");
         this.add(list2);
 
         this.setLayout(new FlowLayout());
@@ -102,7 +104,7 @@ public class GUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 model.clear();
                 BootRepository bootRepository = new BootRepository();
-                ArrayList<Boot> list;
+                ArrayList<VerlieheneBoote> list;
                 try {
                     list = bootRepository.getAllRented();
                 } catch (ParserConfigurationException ex) {
@@ -114,7 +116,7 @@ public class GUI extends JFrame {
                 }
                 String prefix = "<html><pre>";
                 String suffix = "</pre></html>";
-                for (Boot string: list) {
+                for (VerlieheneBoote string: list) {
                     model.addElement(prefix + string.toString() + suffix);
                 }
             }
@@ -125,7 +127,7 @@ public class GUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 model.clear();
                 BootRepository bootRepository = new BootRepository();
-                ArrayList<Boot> list;
+                ArrayList<NichtVerlieheneBoote> list;
                 try {
                     list = bootRepository.getAllNotRented();
                 } catch (ParserConfigurationException ex) {
@@ -137,7 +139,7 @@ public class GUI extends JFrame {
                 }
                 String prefix = "<html><pre>";
                 String suffix = "</pre></html>";
-                for (Boot boot: list) {
+                for (NichtVerlieheneBoote boot: list) {
                     model.addElement(prefix + boot.toString() + suffix);
                 }
             }
@@ -189,5 +191,6 @@ public class GUI extends JFrame {
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
         GUI gui = new GUI();
         gui.setVisible(true);
+
     }
 }

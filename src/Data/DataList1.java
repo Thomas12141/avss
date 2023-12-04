@@ -86,12 +86,13 @@ public class DataList1 {
     public static ArrayList<String> getAllElements() throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document document = builder.parse(xmlFile);
+
         Element element = document.getDocumentElement();
         NodeList nodeList = element.getChildNodes();
         ArrayList<String> list = new ArrayList<>();
         int lenght = nodeList.getLength();
+
         ArrayList<String> verliehenList = new ArrayList<>();
-        ArrayList<String> nichtVerliehenList = new ArrayList<>();
         for (int i = 0; i < lenght; i++) {
             if (nodeList.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 Element el = (Element) nodeList.item(i);
@@ -102,13 +103,10 @@ public class DataList1 {
                     String rueckgabedatum = el.getElementsByTagName("Rueckgabedatum").item(0).getTextContent();
                     String kundenname = el.getElementsByTagName("Kundenname").item(0).getTextContent();
                     verliehenList.add(id + ";" + ausleihdatum + ";"+ rueckgabedatum + ";" + kundenname);
-                }else {
-                    nichtVerliehenList.add(id);
                 }
             }
         }
         list.addAll(verliehenList);
-        list.addAll(nichtVerliehenList);
         return list;
     }
 }
