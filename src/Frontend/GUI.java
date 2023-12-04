@@ -99,15 +99,18 @@ public class GUI extends JFrame {
         list1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.clear();
-                BootRepository bootRepository = new BootRepository();
-                ArrayList<VerlieheneBoote> list = new ArrayList<>();
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            ArrayList<VerlieheneBoote> answer = bootRepository.getAllRented();
-                            list.addAll(answer);
+                            model.clear();
+                            BootRepository bootRepository = new BootRepository();
+                            ArrayList<VerlieheneBoote> list = bootRepository.getAllRented();
+                            String prefix = "<html><pre>";
+                            String suffix = "</pre></html>";
+                            for (VerlieheneBoote string: list) {
+                                model.addElement(prefix + string.toString() + suffix);
+                            }
                         } catch (ParserConfigurationException ex) {
                             throw new RuntimeException(ex);
                         } catch (IOException ex) {
@@ -117,26 +120,24 @@ public class GUI extends JFrame {
                         }
                     }
                 });
-                String prefix = "<html><pre>";
-                String suffix = "</pre></html>";
-                for (VerlieheneBoote string: list) {
-                    model.addElement(prefix + string.toString() + suffix);
-                }
             }
         });
 
         list2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.clear();
-                BootRepository bootRepository = new BootRepository();
-                ArrayList<NichtVerlieheneBoote> list = new ArrayList<>();
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            ArrayList<NichtVerlieheneBoote> answer = bootRepository.getAllNotRented();
-                            list.addAll(answer);
+                            model.clear();
+                            BootRepository bootRepository = new BootRepository();
+                            ArrayList<NichtVerlieheneBoote> list = bootRepository.getAllNotRented();
+                            String prefix = "<html><pre>";
+                            String suffix = "</pre></html>";
+                            for (NichtVerlieheneBoote boot: list) {
+                                model.addElement(prefix + boot.toString() + suffix);
+                            }
                         } catch (ParserConfigurationException ex) {
                             throw new RuntimeException(ex);
                         } catch (IOException ex) {
@@ -146,52 +147,49 @@ public class GUI extends JFrame {
                         }
                     }
                 });
-                String prefix = "<html><pre>";
-                String suffix = "</pre></html>";
-                for (NichtVerlieheneBoote boot: list) {
-                    model.addElement(prefix + boot.toString() + suffix);
-                }
             }
         });
 
         hinzufuegen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BootRepository bootRepository = new BootRepository();
-                String id = idTextField.getText();
-                String ausleihDatum = ausleihdatumTextField.getText();
-                String rueckgabeDatum = rueckgabedatumTextField.getText();
-                String kundenName = kundennameTextField.getText();
-                if(ausleihDatum.isEmpty()&&rueckgabeDatum.isEmpty()&&kundenName.isEmpty()){
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                bootRepository.addNewBootToList(id);
-                            } catch (Exception ex) {
-                                error.setText(ex.getMessage());
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            BootRepository bootRepository = new BootRepository();
+                            String id = idTextField.getText();
+                            String ausleihDatum = ausleihdatumTextField.getText();
+                            String rueckgabeDatum = rueckgabedatumTextField.getText();
+                            String kundenName = kundennameTextField.getText();
+                            if(ausleihDatum.isEmpty()&&rueckgabeDatum.isEmpty()&&kundenName.isEmpty()){
+
+                            }else {
+                                try {
+                                    bootRepository.addBootToList(id, ausleihDatum, rueckgabeDatum, kundenName);
+                                } catch (Exception ex) {
+                                    error.setText(ex.getMessage());
+                                }
                             }
+                            bootRepository.addNewBootToList(id);
+                        } catch (Exception ex) {
+                            error.setText(ex.getMessage());
                         }
-                    });
-                }else {
-                    try {
-                        bootRepository.addBootToList(id, ausleihDatum, rueckgabeDatum, kundenName);
-                    } catch (Exception ex) {
-                        error.setText(ex.getMessage());
                     }
-                }
+                });
+
             }
         });
 
         loeschen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BootRepository bootRepository = new BootRepository();
-                String id = idTextField.getText();
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
                         try {
+                            BootRepository bootRepository = new BootRepository();
+                            String id = idTextField.getText();
                             bootRepository.deleteBootFromList(id);
                         } catch (Exception ex) {
                             error.setText(ex.getMessage());
