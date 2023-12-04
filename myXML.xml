@@ -1,10 +1,118 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Boote>
-                    
+                                    
     
     
     
-    <Boot ID="1000">
+    
+    
+    
+    
+                                        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <NichtVerlieheneBoot ID="12412">
+                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <Verliehen>nein</Verliehen>
+                                                                                    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </NichtVerlieheneBoot>
+                                        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <VerlieheneBoot ID="125666">
+                                                                                
+        
+        
+        
+        
+        
+        
+        
+        
+        <Verliehen>ja</Verliehen>
+                                                                                
+        
+        
+        
+        
+        
+        
+        
+        
+        <Ausleihdatum>12/07/1222</Ausleihdatum>
+                                                                                
+        
+        
+        
+        
+        
+        
+        
+        
+        <Rueckgabedatum>13/07/1222</Rueckgabedatum>
+                                                                                
+        
+        
+        
+        
+        
+        
+        
+        
+        <Kundenname>Elli</Kundenname>
+                                                                            
+    
+    
+    
+    
+    
+    
+    
+    
+    </VerlieheneBoot>
+                                    
+
+    
+    
+    
+    
+    
+    
+    
+    <VerlieheneBoot ID="124126">
                                                                 
         
         
@@ -12,7 +120,31 @@
         
         
         
-        <Verliehen>nein</Verliehen>
+        <Verliehen>ja</Verliehen>
+                                                                
+        
+        
+        
+        
+        
+        
+        <Ausleihdatum>30/11/2023</Ausleihdatum>
+                                                                
+        
+        
+        
+        
+        
+        
+        <Rueckgabedatum>01/12/2023</Rueckgabedatum>
+                                                                
+        
+        
+        
+        
+        
+        
+        <Kundenname>Pert</Kundenname>
                                                             
     
     
@@ -20,7 +152,7 @@
     
     
     
-    </Boot>
+    </VerlieheneBoot>
                             
     
     
@@ -28,108 +160,71 @@
     
     
     
-    <Boot ID="12412">
+    <VerlieheneBoot ID="12415">
                                                         
         
         
         
         
         
-        <Verliehen>nein</Verliehen>
+        <Verliehen>ja</Verliehen>
+                                                        
+        
+        
+        
+        
+        
+        <Ausleihdatum>30/11/2023</Ausleihdatum>
+                                                        
+        
+        
+        
+        
+        
+        <Rueckgabedatum>01/12/2023</Rueckgabedatum>
+                                                        
+        
+        
+        
+        
+        
+        <Kundenname>Pert;</Kundenname>
                                                     
     
     
     
     
     
-    </Boot>
-                        
-    
-    
-    
-    
-    
-    <Boot ID="125666">
-                                                
-        
-        
-        
-        
-        <Verliehen>ja</Verliehen>
-                                                
-        
-        
-        
-        
-        <Ausleihdatum>12/07/1222</Ausleihdatum>
-                                                
-        
-        
-        
-        
-        <Rueckgabedatum>13/07/1222</Rueckgabedatum>
-                                                
-        
-        
-        
-        
-        <Kundenname>Elli</Kundenname>
-                                            
-    
-    
-    
-    
-    </Boot>
+    </VerlieheneBoot>
                     
-
     
     
     
-    <Boot ID="124126">
-                                
+    <VerlieheneBoot ID="124154">
+                                        
+        
         
         
         <Verliehen>ja</Verliehen>
-                                
+                                        
+        
         
         
         <Ausleihdatum>30/11/2023</Ausleihdatum>
-                                
+                                        
+        
         
         
         <Rueckgabedatum>01/12/2023</Rueckgabedatum>
-                                
+                                        
+        
         
         
         <Kundenname>Pert</Kundenname>
-                            
+                                    
     
     
-    </Boot>
-            
     
+    </VerlieheneBoot>
     
-    <Boot ID="12415">
-                        
-        
-        <Verliehen>ja</Verliehen>
-                        
-        
-        <Ausleihdatum>30/11/2023</Ausleihdatum>
-                        
-        
-        <Rueckgabedatum>01/12/2023</Rueckgabedatum>
-                        
-        
-        <Kundenname>Pert;</Kundenname>
-                    
-    
-    </Boot>
-
-    <Boot ID="124154">
-        <Verliehen>ja</Verliehen>
-        <Ausleihdatum>30/11/2023</Ausleihdatum>
-        <Rueckgabedatum>01/12/2023</Rueckgabedatum>
-        <Kundenname>Pert</Kundenname>
-    </Boot>
 </Boote>

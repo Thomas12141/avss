@@ -153,12 +153,8 @@ public class GUI extends JFrame {
                 if(ausleihDatum.isEmpty()&&rueckgabeDatum.isEmpty()&&kundenName.isEmpty()){
                     try {
                         bootRepository.addNewBootToList(id);
-                    } catch (ParserConfigurationException | IOException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (TransformerException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (SAXException ex) {
-                        throw new RuntimeException(ex);
+                    } catch (Exception ex) {
+                        error.setText(ex.getMessage());
                     }
                 }else {
                     try {

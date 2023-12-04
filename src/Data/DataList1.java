@@ -64,7 +64,7 @@ public class DataList1 {
         DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document document = builder.parse(xmlFile);
 
-        NodeList bootList = document.getElementsByTagName("VerlieheneBoote");
+        NodeList bootList = document.getElementsByTagName("VerlieheneBoot");
 
         for (int i = 0; i < bootList.getLength(); i++) {
             Element bootElement = (Element) bootList.item(i);

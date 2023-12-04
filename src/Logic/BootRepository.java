@@ -11,10 +11,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class BootRepository{
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    private static String numberPattern = "[1-9][0-9]*";
+    private static String namePattern = "[a-zA-Z[ ]*]+";
 
     public ArrayList<VerlieheneBoote> getAllRented() throws ParserConfigurationException, IOException, SAXException {
         ArrayList<VerlieheneBoote> boats = convertToRentedBoats(DataList1.getAllElements());
@@ -28,7 +32,7 @@ public class BootRepository{
     }
 
     public ArrayList<NichtVerlieheneBoote> getAllNotRented() throws ParserConfigurationException, IOException, SAXException {
-        ArrayList<NichtVerlieheneBoote> boats = convertToBoats(DataList2.getAllElements());
+        ArrayList<NichtVerlieheneBoote> boats = convertToNotRentedBoats(DataList2.getAllElements());
         ArrayList<NichtVerlieheneBoote> result = new ArrayList<>();
         for (NichtVerlieheneBoote boat: boats) {
             if(boat.getVerliehen().equals("nein")){
@@ -39,7 +43,7 @@ public class BootRepository{
     }
     public void addNewBootToList(String id) throws ParserConfigurationException, IOException, TransformerException, SAXException {
 
-        if(id == null) throw new NullPointerException("Boat object is missing required information.");
+        if(!Pattern.compile(namePattern).matcher(id).matches()) throw new NullPointerException("Boat object is missing required information.");
 
         if(idExists(id)) throw new IllegalArgumentException("ID already exists. Please choose a different ID.");
 
@@ -48,11 +52,18 @@ public class BootRepository{
 
     public boolean idExists(String id) throws ParserConfigurationException, IOException, SAXException {
 
-        NichtVerlieheneBoote bootToFind = new NichtVerlieheneBoote(id);
-        ArrayList<NichtVerlieheneBoote> allBoote = convertToBoats(DataList1.getAllElements());
+        ArrayList<NichtVerlieheneBoote> nichtVerlieheneBooteArrayList = convertToNotRentedBoats(DataList2.getAllElements());
 
-        for (NichtVerlieheneBoote boot : allBoote) {
-            if (boot.equals(bootToFind)) {
+        ArrayList<VerlieheneBoote> verlieheneBooteArrayList = convertToRentedBoats(DataList1.getAllElements());
+
+        for (NichtVerlieheneBoote boot : nichtVerlieheneBooteArrayList) {
+            if (boot.getId().equals(id)) {
+                return true;
+            }
+        }
+
+        for (VerlieheneBoote boot : verlieheneBooteArrayList) {
+            if (boot.getId().equals(id)) {
                 return true;
             }
         }
@@ -78,12 +89,13 @@ public class BootRepository{
 
     public void addBootToList(String id, String ausleihdatumStr, String rueckgabedatumStr, String kundennname) throws Exception {
 
-        if(id.isEmpty()) throw new NullPointerException("Boat object is missing required information.");
+        if(!Pattern.compile(namePattern).matcher(id).matches()) throw new NullPointerException("Boat object is missing required information.");
 
         if(idExists(id)) throw new IllegalArgumentException("ID already exists. Please choose a different ID.");
 
         if(!isValidDateFormat(ausleihdatumStr, rueckgabedatumStr)) throw new Exception("Invalid date format. Please use the date format 'dd/mm/yyyy'.");
 
+        if(Pattern.compile(namePattern).matcher(kundennname).matches()) throw new IllegalArgumentException("Name must consist only letters and blank spaces.");
         LocalDate ausleihdatum = LocalDate.parse(ausleihdatumStr, formatter);
         LocalDate rueckgabedatum = LocalDate.parse(rueckgabedatumStr, formatter);
 
@@ -93,21 +105,21 @@ public class BootRepository{
     }
 
     public void deleteBootFromList(String id) throws ParserConfigurationException, IOException, TransformerException, SAXException, IllegalAccessException {
-        ArrayList<NichtVerlieheneBoote> boats = convertToBoats(DataList1.getAllElements());
-        NichtVerlieheneBoote boat = null;
-        for (NichtVerlieheneBoote toPick:boats) {
+        ArrayList<NichtVerlieheneBoote> notRentedBoatsboats = convertToNotRentedBoats(DataList2.getAllElements());
+        NichtVerlieheneBoote notRentedBoat = null;
+        for (NichtVerlieheneBoote toPick:notRentedBoatsboats) {
             if(toPick.getId().equals(id)){
-                boat = toPick;
+                notRentedBoat = toPick;
                 break;
             }
         }
-        if(boat==null){
+        if(!idExists(id)){
             throw new NullPointerException("This id does not exist.");
         }
-        if(boat.getVerliehen().equals("ja")){
+        if(notRentedBoat == null){
             throw new IllegalAccessException("Rented boats cannot be deleted.");
         }
-        DataList1.deleteElement(id);
+        DataList2.deleteElement(id);
     }
 
     public void bootListeAusgeben(String id, String verliehen) throws ParserConfigurationException, IOException, SAXException {
@@ -117,7 +129,7 @@ public class BootRepository{
         DataList1.getAllElements();
     }
 
-    private ArrayList<NichtVerlieheneBoote> convertToBoats(ArrayList<String> strings){
+    private ArrayList<NichtVerlieheneBoote> convertToNotRentedBoats(ArrayList<String> strings){
 
         ArrayList<NichtVerlieheneBoote> boats = new ArrayList<>();
         for (String string: strings) {
