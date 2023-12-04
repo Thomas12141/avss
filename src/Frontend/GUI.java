@@ -101,16 +101,22 @@ public class GUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 model.clear();
                 BootRepository bootRepository = new BootRepository();
-                ArrayList<VerlieheneBoote> list;
-                try {
-                    list = bootRepository.getAllRented();
-                } catch (ParserConfigurationException ex) {
-                    throw new RuntimeException(ex);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                } catch (SAXException ex) {
-                    throw new RuntimeException(ex);
-                }
+                ArrayList<VerlieheneBoote> list = new ArrayList<>();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            ArrayList<VerlieheneBoote> answer = bootRepository.getAllRented();
+                            list.addAll(answer);
+                        } catch (ParserConfigurationException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (SAXException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                });
                 String prefix = "<html><pre>";
                 String suffix = "</pre></html>";
                 for (VerlieheneBoote string: list) {
@@ -124,16 +130,22 @@ public class GUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 model.clear();
                 BootRepository bootRepository = new BootRepository();
-                ArrayList<NichtVerlieheneBoote> list;
-                try {
-                    list = bootRepository.getAllNotRented();
-                } catch (ParserConfigurationException ex) {
-                    throw new RuntimeException(ex);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                } catch (SAXException ex) {
-                    throw new RuntimeException(ex);
-                }
+                ArrayList<NichtVerlieheneBoote> list = new ArrayList<>();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            ArrayList<NichtVerlieheneBoote> answer = bootRepository.getAllNotRented();
+                            list.addAll(answer);
+                        } catch (ParserConfigurationException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (SAXException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                });
                 String prefix = "<html><pre>";
                 String suffix = "</pre></html>";
                 for (NichtVerlieheneBoote boot: list) {
@@ -151,11 +163,16 @@ public class GUI extends JFrame {
                 String rueckgabeDatum = rueckgabedatumTextField.getText();
                 String kundenName = kundennameTextField.getText();
                 if(ausleihDatum.isEmpty()&&rueckgabeDatum.isEmpty()&&kundenName.isEmpty()){
-                    try {
-                        bootRepository.addNewBootToList(id);
-                    } catch (Exception ex) {
-                        error.setText(ex.getMessage());
-                    }
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                bootRepository.addNewBootToList(id);
+                            } catch (Exception ex) {
+                                error.setText(ex.getMessage());
+                            }
+                        }
+                    });
                 }else {
                     try {
                         bootRepository.addBootToList(id, ausleihDatum, rueckgabeDatum, kundenName);
@@ -171,12 +188,16 @@ public class GUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 BootRepository bootRepository = new BootRepository();
                 String id = idTextField.getText();
-                try {
-                    bootRepository.deleteBootFromList(id);
-                } catch (ParserConfigurationException | TransformerException | IOException | SAXException |
-                         IllegalAccessException | NullPointerException ex) {
-                    error.setText(ex.getMessage());
-                }
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            bootRepository.deleteBootFromList(id);
+                        } catch (Exception ex) {
+                            error.setText(ex.getMessage());
+                        }
+                    }
+                });
             }
         });
     }
