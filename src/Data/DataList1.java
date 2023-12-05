@@ -1,6 +1,5 @@
 package Data;
 
-import Boot.Boot;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -17,33 +16,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Data {
+public class DataList1 {
 
     static File xmlFile = new File("myXML.xml");
 
-    public static void addNewElement(String id) throws ParserConfigurationException, IOException, SAXException, TransformerException {
-        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        Document document = builder.parse(xmlFile);
 
-        Element root = document.getDocumentElement();
-
-        Element boot = document.createElement("Boot");
-        boot.setAttribute("ID", id);
-        boot.setIdAttribute("ID", true);
-        root.appendChild(boot);
-
-        Element verliehenElement = document.createElement("Verliehen");
-        verliehenElement.appendChild(document.createTextNode("nein"));
-        boot.appendChild(verliehenElement);
-
-        DOMSource domSource = new DOMSource(document);
-        Transformer transformer = TransformerFactory.newInstance().newTransformer();
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        StreamResult result = new StreamResult(xmlFile);
-        transformer.transform(domSource, result);
-    }
-
-    public static void addNewElement(String id, String verliehen, String ausleihdatum, String rueckhgabedatum,
+    public static void addNewElement(String id, String ausleihdatum, String rueckhgabedatum,
                                      String kundennname) throws ParserConfigurationException, IOException, SAXException, TransformerException {
 
         DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -51,13 +29,13 @@ public class Data {
 
         Element root = document.getDocumentElement();
 
-        Element boot = document.createElement("Boot");
+        Element boot = document.createElement("VerlieheneBoote");
         boot.setAttribute("ID", id);
         boot.setIdAttribute("ID", true);
         root.appendChild(boot);
 
         Element verliehenElement = document.createElement("Verliehen");
-        verliehenElement.appendChild(document.createTextNode(verliehen));
+        verliehenElement.appendChild(document.createTextNode("ja"));
         boot.appendChild(verliehenElement);
 
         Element ausleihdatumDatumElement = document.createElement("Ausleihdatum");
@@ -86,7 +64,7 @@ public class Data {
         DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document document = builder.parse(xmlFile);
 
-        NodeList bootList = document.getElementsByTagName("Boot");
+        NodeList bootList = document.getElementsByTagName("VerlieheneBoot");
 
         for (int i = 0; i < bootList.getLength(); i++) {
             Element bootElement = (Element) bootList.item(i);
@@ -105,15 +83,16 @@ public class Data {
         }
     }
 
-    public static ArrayList<Boot> getAllElements() throws ParserConfigurationException, IOException, SAXException {
+    public static ArrayList<String> getAllElements() throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document document = builder.parse(xmlFile);
+
         Element element = document.getDocumentElement();
         NodeList nodeList = element.getChildNodes();
-        ArrayList<Boot> list = new ArrayList<>();
+        ArrayList<String> list = new ArrayList<>();
         int lenght = nodeList.getLength();
-        ArrayList<Boot> verliehenList = new ArrayList<>();
-        ArrayList<Boot> nichtVerliehenList = new ArrayList<>();
+
+        ArrayList<String> verliehenList = new ArrayList<>();
         for (int i = 0; i < lenght; i++) {
             if (nodeList.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 Element el = (Element) nodeList.item(i);
@@ -123,17 +102,11 @@ public class Data {
                     String ausleihdatum = el.getElementsByTagName("Ausleihdatum").item(0).getTextContent();
                     String rueckgabedatum = el.getElementsByTagName("Rueckgabedatum").item(0).getTextContent();
                     String kundenname = el.getElementsByTagName("Kundenname").item(0).getTextContent();
-                    Boot boot = new Boot(id, verliehen, ausleihdatum, rueckgabedatum, kundenname);
-                    verliehenList.add(boot);
-                }else {
-
-                    Boot boot = new Boot(id);
-                    nichtVerliehenList.add(boot);
+                    verliehenList.add(id + ";" + ausleihdatum + ";"+ rueckgabedatum + ";" + kundenname);
                 }
             }
         }
         list.addAll(verliehenList);
-        list.addAll(nichtVerliehenList);
         return list;
     }
 }

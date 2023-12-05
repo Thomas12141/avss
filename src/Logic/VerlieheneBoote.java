@@ -1,22 +1,18 @@
-package Boot;
-public class Boot {
-    private String id, verliehen, ausleihdatum, rueckhgabedatum, kundennname;
+package Logic;
+public class VerlieheneBoote {
+    private String id;
+    private static String verliehen;
+    private String ausleihdatum;
+    private String rueckhgabedatum;
+    private String kundennname;
 
 
-    public Boot(String id, String verliehen, String ausleihdatum, String rueckhgabedatum, String kundennname) {
+    public VerlieheneBoote(String id, String ausleihdatum, String rueckhgabedatum, String kundennname) {
         this.id = id;
-        this.verliehen = verliehen;
+        this.verliehen = "ja";
         this.ausleihdatum = ausleihdatum;
         this.rueckhgabedatum = rueckhgabedatum;
         this.kundennname = kundennname;
-    }
-
-    public Boot(String id) {
-        this.id = id;
-        this.verliehen = "nein";
-        this.ausleihdatum = null;
-        this.rueckhgabedatum = null;
-        this.kundennname = null;
     }
 
     public void setVerliehen(String verliehen) {
@@ -39,7 +35,7 @@ public class Boot {
         return id;
     }
 
-    public String getVerliehen() {
+    public static String getVerliehen() {
         return verliehen;
     }
 
@@ -56,14 +52,11 @@ public class Boot {
     }
     @Override
     public String toString() {
-        if(verliehen.equals("ja"))
-            return "Id: " + id + "\t\t" + "Kunde: " + kundennname + "\t\t" + "Verliehen am: " + ausleihdatum + "\t\t" + "bis: " + rueckhgabedatum + ".";
-        else
-            return "Id: " + id + "\t\t" + "Bereit um zu leihen.";
+        return "Id: " + id + "\t\t" + "Kunde: " + kundennname + "\t\t" + "Verliehen am: " + ausleihdatum + "\t\t" + "bis: " + rueckhgabedatum + ".";
     }
 
     @Override
     public boolean equals(Object obj) {
-        return this.id.equals(((Boot)obj).id);
+        return this.id.equals(((VerlieheneBoote)obj).id);
     }
 }

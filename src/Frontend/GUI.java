@@ -1,11 +1,13 @@
 package Frontend;
 
-import Data.Data;
+import Logic.NichtVerlieheneBoote;
+import Logic.VerlieheneBoote;
 import org.xml.sax.SAXException;
-import Boot.*;
+import Logic.BootRepository;
 
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +18,7 @@ import java.util.ArrayList;
 public class GUI extends JFrame {
     public GUI() throws ParserConfigurationException, IOException, SAXException {
         super("Verleih");
-        this.setSize(1280,1024);
+        this.setSize(1024,576);
         this.setLayout(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -25,9 +27,15 @@ public class GUI extends JFrame {
 
 
         JList<String> listComponents = new JList<>();
-        listComponents.setBounds(0,0,1280,800);
+        listComponents.setBounds(0,0,1024,400);
         listComponents.setModel(model);
-        listComponents.setPreferredSize(new Dimension(1260, 800));
+        listComponents.setPreferredSize(new Dimension(1004, 400));
+
+        JButton list1 = new JButton("Verliehene Boote");
+        this.add(list1);
+
+        JButton list2 = new JButton("Verfügbare Boote");
+        this.add(list2);
 
         this.setLayout(new FlowLayout());
         this.add(listComponents);
@@ -37,6 +45,11 @@ public class GUI extends JFrame {
         jPanel.setLayout(new FlowLayout());
 
         Dimension textFieldDimension = new Dimension(100, 25);
+
+
+
+        JLabel blank1 = new JLabel("                              ");
+        jPanel.add(blank1);
 
         JLabel idLabel = new JLabel("Id: ");
         idLabel.setPreferredSize(new Dimension(20, 25));
@@ -76,31 +89,117 @@ public class GUI extends JFrame {
         JButton loeschen = new JButton("löschen");
         jPanel.add(loeschen);
 
-        JButton aktualisieren = new JButton("aktualisieren");
-        jPanel.add(aktualisieren);
+        JLabel blank2 = new JLabel("                                 ");
+        jPanel.add(blank2);
 
         this.add(jPanel);
 
-        aktualisieren.addActionListener(new ActionListener() {
+        JLabel error = new JLabel("");
+        error.setForeground(Color.red);
+        this.add(error);
+        list1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<Boot> boats = null;
-                try {
-                    boats = Data.getAllElements();
-                } catch (ParserConfigurationException ex) {
-                    throw new RuntimeException(ex);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                } catch (SAXException ex) {
-                    throw new RuntimeException(ex);
-                }
-                for (Boot boat: boats) {
-                    StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append("<html><pre>");
-                    stringBuilder.append(boat.toString());
-                    stringBuilder.append("</pre></html>");
-                    model.addElement(stringBuilder.toString());
-                }
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            error.setText("");
+                            model.clear();
+                            BootRepository bootRepository = new BootRepository();
+                            ArrayList<VerlieheneBoote> list = bootRepository.getAllRented();
+                            String prefix = "<html><pre>";
+                            String suffix = "</pre></html>";
+                            for (VerlieheneBoote string: list) {
+                                model.addElement(prefix + string.toString() + suffix);
+                            }
+                        } catch (ParserConfigurationException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (SAXException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                });
+            }
+        });
+
+        list2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            error.setText("");
+                            model.clear();
+                            BootRepository bootRepository = new BootRepository();
+                            ArrayList<NichtVerlieheneBoote> list = bootRepository.getAllNotRented();
+                            String prefix = "<html><pre>";
+                            String suffix = "</pre></html>";
+                            for (NichtVerlieheneBoote boot: list) {
+                                model.addElement(prefix + boot.toString() + suffix);
+                            }
+                        } catch (ParserConfigurationException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (SAXException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                });
+            }
+        });
+
+        hinzufuegen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            error.setText("");
+                            BootRepository bootRepository = new BootRepository();
+                            String id = idTextField.getText();
+                            String ausleihDatum = ausleihdatumTextField.getText();
+                            String rueckgabeDatum = rueckgabedatumTextField.getText();
+                            String kundenName = kundennameTextField.getText();
+                            if(ausleihDatum.isEmpty()&&rueckgabeDatum.isEmpty()&&kundenName.isEmpty()){
+                                bootRepository.addNewBootToList(id);
+                            }else {
+                                try {
+                                    bootRepository.addBootToList(id, ausleihDatum, rueckgabeDatum, kundenName);
+                                } catch (Exception ex) {
+                                    error.setText(ex.getMessage());
+                                }
+                            }
+                        } catch (Exception ex) {
+                            error.setText(ex.getMessage());
+                        }
+                    }
+                });
+
+            }
+        });
+
+        loeschen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            error.setText("");
+                            BootRepository bootRepository = new BootRepository();
+                            String id = idTextField.getText();
+                            bootRepository.deleteBootFromList(id);
+                        } catch (Exception ex) {
+                            error.setText(ex.getMessage());
+                        }
+                    }
+                });
             }
         });
     }
@@ -108,5 +207,6 @@ public class GUI extends JFrame {
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
         GUI gui = new GUI();
         gui.setVisible(true);
+
     }
 }
