@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Boote>
-                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                            
     
     
     
@@ -285,7 +285,410 @@
     
     
     
+    
     <VerlieheneBoote ID="7745">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <Verliehen>ja</Verliehen>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <Ausleihdatum>07/12/2020</Ausleihdatum>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <Rueckgabedatum>07/12/2020</Rueckgabedatum>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <Kundenname>Andreas</Kundenname>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </VerlieheneBoote>
+                                                                                                                                                                                                                                                                        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <VerlieheneBoote ID="77453">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
         
         
@@ -681,7 +1084,7 @@
     
     
     
-    <VerlieheneBoote ID="77453">
+    <VerlieheneBoote ID="774531">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
         
         
@@ -1071,7 +1474,7 @@
     
     
     
-    <VerlieheneBoote ID="774531">
+    <VerlieheneBoote ID="77422">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
         
         
@@ -1455,7 +1858,7 @@
     
     
     
-    <VerlieheneBoote ID="77422">
+    <VerlieheneBoote ID="774221">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
         
         
@@ -1833,7 +2236,7 @@
     
     
     
-    <VerlieheneBoote ID="774221">
+    <VerlieheneBoote ID="77422133">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
         
         
@@ -2205,7 +2608,7 @@
     
     
     
-    <VerlieheneBoote ID="77422133">
+    <VerlieheneBoote ID="7742222">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
         
         
@@ -2571,7 +2974,7 @@
     
     
     
-    <VerlieheneBoote ID="7742222">
+    <VerlieheneBoote ID="7742211">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
         
         
@@ -2931,7 +3334,7 @@
     
     
     
-    <VerlieheneBoote ID="7742211">
+    <VerlieheneBoote ID="7742214">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
         
         
@@ -3285,7 +3688,7 @@
     
     
     
-    <VerlieheneBoote ID="7742214">
+    <VerlieheneBoote ID="7742216">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
         
         
@@ -3633,7 +4036,7 @@
     
     
     
-    <VerlieheneBoote ID="7742216">
+    <VerlieheneBoote ID="7742244">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
         
         
@@ -3921,343 +4324,6 @@
     </VerlieheneBoote>
                                                                                                                                                                                                                                 
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <VerlieheneBoote ID="7742244">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <Verliehen>ja</Verliehen>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <Ausleihdatum>07/12/2020</Ausleihdatum>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <Rueckgabedatum>07/12/2020</Rueckgabedatum>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <Kundenname>Andreas</Kundenname>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    </VerlieheneBoote>
-                                                                                                                                                                                                                            
-    
 
 
     
@@ -4319,8 +4385,10 @@
     
     
     
+    
     <NichtVerlieheneBoot ID="12412">
-                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                        
+        
         
         
         
@@ -4368,7 +4436,8 @@
         
         
         <Verliehen>nein</Verliehen>
-                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                    
+    
     
     
     
@@ -4416,11 +4485,12 @@
     
     
     </NichtVerlieheneBoot>
-                                                                                                                                                                                            
+                                                                                                                                                                                                
     
 
 
 
+    
     
     
     
@@ -4465,7 +4535,8 @@
     
     
     <NichtVerlieheneBoot ID="77455">
-                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                        
+        
         
         
         
@@ -4509,7 +4580,8 @@
         
         
         <Verliehen>nein</Verliehen>
-                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                    
+    
     
     
     
@@ -4553,7 +4625,7 @@
     
     
     </NichtVerlieheneBoot>
-                                                                                                                                                                            
+                                                                                                                                                                                
     
     
     
@@ -4620,8 +4692,10 @@
     
     
     
+    
     <VerlieheneBoote ID="132446">
-                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                
+        
         
         
         
@@ -4650,7 +4724,8 @@
         
         
         <Verliehen>ja</Verliehen>
-                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                
+        
         
         
         
@@ -4679,7 +4754,8 @@
         
         
         <Ausleihdatum>07/12/2023</Ausleihdatum>
-                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                
+        
         
         
         
@@ -4708,7 +4784,8 @@
         
         
         <Rueckgabedatum>07/12/2023</Rueckgabedatum>
-                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                
+        
         
         
         
@@ -4737,7 +4814,8 @@
         
         
         <Kundenname>Andreas</Kundenname>
-                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                            
+    
     
     
     
@@ -4766,7 +4844,7 @@
     
     
     </VerlieheneBoote>
-                                                                                                                
+                                                                                                                    
     
     
     
@@ -4851,8 +4929,10 @@
     
     
     
+    
     <NichtVerlieheneBoot ID="1322">
-                                                                                                                                                                                                        
+                                                                                                                                                                                                                
+        
         
         
         
@@ -4877,7 +4957,8 @@
         
         
         <Verliehen>nein</Verliehen>
-                                                                                                                                                                                                    
+                                                                                                                                                                                                            
+    
     
     
     
@@ -4902,7 +4983,7 @@
     
     
     </NichtVerlieheneBoot>
-                                                                                                
+                                                                                                    
     
     
     
@@ -4940,7 +5021,80 @@
     
     
     
+    
     <NichtVerlieheneBoot ID="23465">
+                                                                                                                                                                                                
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <Verliehen>nein</Verliehen>
+                                                                                                                                                                                            
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </NichtVerlieheneBoot>
+                                                                                            
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <NichtVerlieheneBoot ID="2465">
                                                                                                                                                                                         
         
         
@@ -5009,7 +5163,7 @@
     
     
     
-    <NichtVerlieheneBoot ID="2465">
+    <NichtVerlieheneBoot ID="24651">
                                                                                                                                                                                 
         
         
@@ -5075,7 +5229,7 @@
     
     
     
-    <NichtVerlieheneBoot ID="24651">
+    <NichtVerlieheneBoot ID="246514">
                                                                                                                                                                         
         
         
@@ -5127,67 +5281,6 @@
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <NichtVerlieheneBoot ID="246514">
-                                                                                                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <Verliehen>nein</Verliehen>
-                                                                                                                                                            
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    </NichtVerlieheneBoot>
-                                                                            
-    
-    
-    
-    
-    
-    
-    
-    
                             
     
     
@@ -5206,7 +5299,65 @@
     
     
     
+    
     <NichtVerlieheneBoot ID="2462">
+                                                                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <Verliehen>nein</Verliehen>
+                                                                                                                                                    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </NichtVerlieheneBoot>
+                                                                        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <NichtVerlieheneBoot ID="24627">
                                                                                                                                                 
         
         
@@ -5260,7 +5411,7 @@
     
     
     
-    <NichtVerlieheneBoot ID="24627">
+    <NichtVerlieheneBoot ID="246278">
                                                                                                                                         
         
         
@@ -5311,7 +5462,7 @@
     
     
     
-    <NichtVerlieheneBoot ID="246278">
+    <NichtVerlieheneBoot ID="2462789">
                                                                                                                                 
         
         
@@ -5359,7 +5510,7 @@
     
     
     
-    <NichtVerlieheneBoot ID="2462789">
+    <NichtVerlieheneBoot ID="2462777">
                                                                                                                         
         
         
@@ -5375,79 +5526,66 @@
         
         
         <Verliehen>nein</Verliehen>
-                                                                                                                    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+            
     </NichtVerlieheneBoot>
                                                         
     
+
+
+
+
+
+
+
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <NichtVerlieheneBoot ID="2462777">
-                                                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <Verliehen>nein</Verliehen>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </NichtVerlieheneBoot>
-                                                    
-    
-
-
-
-
-
-
-
     
     
     
     
     
     <VerlieheneBoote ID="1345">
+                                                        
+        
+        
+        
+        
+        
+        <Verliehen>ja</Verliehen>
+                                                        
+        
+        
+        
+        
+        
+        <Ausleihdatum>07/12/2023</Ausleihdatum>
+                                                        
+        
+        
+        
+        
+        
+        <Rueckgabedatum>07/12/2023</Rueckgabedatum>
+                                                        
+        
+        
+        
+        
+        
+        <Kundenname>Inka</Kundenname>
+                                                    
+    
+    
+    
+    
+    
+    </VerlieheneBoote>
+                        
+    
+    
+    
+    
+    
+    <VerlieheneBoote ID="13455">
                                                 
         
         
@@ -5483,7 +5621,7 @@
     
     
     
-    <VerlieheneBoote ID="13455">
+    <VerlieheneBoote ID="134555">
                                         
         
         
@@ -5513,7 +5651,7 @@
     
     
     
-    <VerlieheneBoote ID="134555">
+    <VerlieheneBoote ID="2345">
                                 
         
         
@@ -5521,11 +5659,11 @@
                                 
         
         
-        <Ausleihdatum>07/12/2023</Ausleihdatum>
+        <Ausleihdatum>10/12/2020</Ausleihdatum>
                                 
         
         
-        <Rueckgabedatum>07/12/2023</Rueckgabedatum>
+        <Rueckgabedatum>10/12/2020</Rueckgabedatum>
                                 
         
         
@@ -5537,31 +5675,12 @@
             
     
     
-    <VerlieheneBoote ID="2345">
-                        
-        
-        <Verliehen>ja</Verliehen>
-                        
-        
-        <Ausleihdatum>10/12/2020</Ausleihdatum>
-                        
-        
-        <Rueckgabedatum>10/12/2020</Rueckgabedatum>
-                        
-        
-        <Kundenname>Inka</Kundenname>
-                    
     
-    </VerlieheneBoote>
-        
     
-    <NichtVerlieheneBoot ID="256">
+    <NichtVerlieheneBoot ID="25655">
                 
         <Verliehen>nein</Verliehen>
             
     </NichtVerlieheneBoot>
     
-    <NichtVerlieheneBoot ID="25655">
-        <Verliehen>nein</Verliehen>
-    </NichtVerlieheneBoot>
 </Boote>
