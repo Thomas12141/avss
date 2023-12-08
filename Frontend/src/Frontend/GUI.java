@@ -194,15 +194,27 @@ public class GUI extends JFrame {
                             error.setText("");
                             BootRepository bootRepository = new BootRepository();
                             String id = idTextField.getText();
-                            bootRepository.deleteBootFromList(id);
-                        } catch (Exception ex) {
-                            error.setText(ex.getMessage());
+                            String ausleihDatum = ausleihdatumTextField.getText();
+                            String rueckgabeDatum = rueckgabedatumTextField.getText();
+                            String kundenName = kundennameTextField.getText();
+                            if(!ausleihDatum.isEmpty() && !rueckgabeDatum.isEmpty() && !kundenName.isEmpty()){
+                            bootRepository.deleteRentedBootFromList(id);
+                        }else {
+                            try {
+                                bootRepository.deleteBootFromList(id);
+                            } catch (Exception ex) {
+                                error.setText(ex.getMessage());
+                            }
                         }
+                    } catch (Exception ex) {
+                        error.setText(ex.getMessage());
                     }
+                }
                 });
             }
         });
     }
+
 
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
         GUI gui = new GUI();
