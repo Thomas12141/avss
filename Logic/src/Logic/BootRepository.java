@@ -116,10 +116,28 @@ public class BootRepository{
         if(!idExists(id)){
             throw new NullPointerException("This id does not exist.");
         }
-        if(notRentedBoat == null){
+        /*if(notRentedBoat == null){
             throw new IllegalAccessException("Rented boats cannot be deleted.");
+        }*/
+        DataList2.deleteNotRentedElement(id);
+    }
+
+    public void deleteRentedBootFromList(String id) throws ParserConfigurationException, IOException, TransformerException, SAXException, IllegalAccessException {
+        ArrayList<VerlieheneBoote> rentedBoatsboats = convertToRentedBoats(DataList1.getAllElements());
+        VerlieheneBoote rentedBoat = null;
+        for (VerlieheneBoote toPick: rentedBoatsboats) {
+            if(toPick.getId().equals(id)){
+                rentedBoat = toPick;
+                break;
+            }
         }
-        DataList2.deleteElement(id);
+        if(!idExists(id)){
+            throw new NullPointerException("This id does not exist.");
+        }
+        /*if(rentedBoat == null){
+            throw new IllegalAccessException("Rented boats cannot be deleted.");
+        }*/
+        DataList1.deleteRentedElement(id);
     }
 
     public void bootListeAusgeben(String id, String verliehen) throws ParserConfigurationException, IOException, SAXException {
