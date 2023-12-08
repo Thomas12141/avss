@@ -23,13 +23,15 @@ public class GUI extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 
-        DefaultListModel<String> model = new DefaultListModel<>();
-
-
         JList<String> listComponents = new JList<>();
-        listComponents.setBounds(0,0,1024,400);
+        DefaultListModel<String> model = new DefaultListModel<>();
         listComponents.setModel(model);
-        listComponents.setPreferredSize(new Dimension(1004, 400));
+
+
+        JScrollPane scrollPane = new JScrollPane(listComponents);
+        scrollPane.setBounds(0, 0, 1024, 400);
+        scrollPane.setPreferredSize(new Dimension(1004, 400));
+
 
         JButton list1 = new JButton("Verliehene Boote");
         this.add(list1);
@@ -38,7 +40,7 @@ public class GUI extends JFrame {
         this.add(list2);
 
         this.setLayout(new FlowLayout());
-        this.add(listComponents);
+        this.add(scrollPane);
         this.setResizable(false);
 
         JPanel jPanel = new JPanel();
