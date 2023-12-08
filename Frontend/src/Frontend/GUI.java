@@ -44,8 +44,8 @@ public class GUI extends JFrame {
         this.setResizable(false);
 
         JPanel jPanel = new JPanel();
+        //jPanel.setPreferredSize(new Dimension(1024, 40));
         jPanel.setLayout(new FlowLayout());
-
         Dimension textFieldDimension = new Dimension(100, 25);
 
 
@@ -96,6 +96,16 @@ public class GUI extends JFrame {
 
         this.add(jPanel);
 
+        kundennameLabel.setVisible(false);
+        kundennameTextField.setVisible(false);
+        rueckgabedatumLabel.setVisible(false);
+        rueckgabedatumTextField.setVisible(false);
+        ausleihdatumLabel.setVisible(false);
+        ausleihdatumTextField.setVisible(false);
+        idLabel.setVisible(false);
+        idTextField.setVisible(false);
+        loeschen.setVisible(false);
+        hinzufuegen.setVisible(false);
         JLabel error = new JLabel("");
         error.setForeground(Color.red);
         this.add(error);
@@ -115,6 +125,16 @@ public class GUI extends JFrame {
                             for (VerlieheneBoote string: list) {
                                 model.addElement(prefix + string.toString() + suffix);
                             }
+                            idLabel.setVisible(true);
+                            idTextField.setVisible(true);
+                            ausleihdatumLabel.setVisible(true);
+                            ausleihdatumTextField.setVisible(true);
+                            kundennameLabel.setVisible(true);
+                            kundennameTextField.setVisible(true);
+                            rueckgabedatumLabel.setVisible(true);
+                            rueckgabedatumTextField.setVisible(true);
+                            loeschen.setVisible(true);
+                            hinzufuegen.setVisible(true);
                         } catch (ParserConfigurationException ex) {
                             throw new RuntimeException(ex);
                         } catch (IOException ex) {
@@ -143,6 +163,18 @@ public class GUI extends JFrame {
                             for (NichtVerlieheneBoote boot: list) {
                                 model.addElement(prefix + boot.toString() + suffix);
                             }
+                            kundennameLabel.setVisible(false);
+                            kundennameTextField.setVisible(false);
+                            rueckgabedatumLabel.setVisible(false);
+                            rueckgabedatumTextField.setVisible(false);
+                            ausleihdatumLabel.setVisible(false);
+                            ausleihdatumTextField.setVisible(false);
+                            idLabel.setVisible(true);
+                            idTextField.setVisible(true);
+                            loeschen.setVisible(true);
+                            hinzufuegen.setVisible(true);
+                            blank1.setText("                                                                                  ");
+                            blank2.setText("                                                                                                                      ");
                         } catch (ParserConfigurationException ex) {
                             throw new RuntimeException(ex);
                         } catch (IOException ex) {
