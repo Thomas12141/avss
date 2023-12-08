@@ -23,13 +23,15 @@ public class GUI extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 
-        DefaultListModel<String> model = new DefaultListModel<>();
-
-
         JList<String> listComponents = new JList<>();
-        listComponents.setBounds(0,0,1024,400);
+        DefaultListModel<String> model = new DefaultListModel<>();
         listComponents.setModel(model);
-        listComponents.setPreferredSize(new Dimension(1004, 400));
+
+
+        JScrollPane scrollPane = new JScrollPane(listComponents);
+        scrollPane.setBounds(0, 0, 1024, 400);
+        scrollPane.setPreferredSize(new Dimension(1004, 400));
+
 
         JButton list1 = new JButton("Verliehene Boote");
         this.add(list1);
@@ -38,12 +40,12 @@ public class GUI extends JFrame {
         this.add(list2);
 
         this.setLayout(new FlowLayout());
-        this.add(listComponents);
+        this.add(scrollPane);
         this.setResizable(false);
 
         JPanel jPanel = new JPanel();
+        //jPanel.setPreferredSize(new Dimension(1024, 40));
         jPanel.setLayout(new FlowLayout());
-
         Dimension textFieldDimension = new Dimension(100, 25);
 
 
@@ -94,6 +96,16 @@ public class GUI extends JFrame {
 
         this.add(jPanel);
 
+        kundennameLabel.setVisible(false);
+        kundennameTextField.setVisible(false);
+        rueckgabedatumLabel.setVisible(false);
+        rueckgabedatumTextField.setVisible(false);
+        ausleihdatumLabel.setVisible(false);
+        ausleihdatumTextField.setVisible(false);
+        idLabel.setVisible(false);
+        idTextField.setVisible(false);
+        loeschen.setVisible(false);
+        hinzufuegen.setVisible(false);
         JLabel error = new JLabel("");
         error.setForeground(Color.red);
         this.add(error);
@@ -113,6 +125,16 @@ public class GUI extends JFrame {
                             for (VerlieheneBoote string: list) {
                                 model.addElement(prefix + string.toString() + suffix);
                             }
+                            idLabel.setVisible(true);
+                            idTextField.setVisible(true);
+                            ausleihdatumLabel.setVisible(true);
+                            ausleihdatumTextField.setVisible(true);
+                            kundennameLabel.setVisible(true);
+                            kundennameTextField.setVisible(true);
+                            rueckgabedatumLabel.setVisible(true);
+                            rueckgabedatumTextField.setVisible(true);
+                            loeschen.setVisible(true);
+                            hinzufuegen.setVisible(true);
                         } catch (ParserConfigurationException ex) {
                             throw new RuntimeException(ex);
                         } catch (IOException ex) {
@@ -141,6 +163,18 @@ public class GUI extends JFrame {
                             for (NichtVerlieheneBoote boot: list) {
                                 model.addElement(prefix + boot.toString() + suffix);
                             }
+                            kundennameLabel.setVisible(false);
+                            kundennameTextField.setVisible(false);
+                            rueckgabedatumLabel.setVisible(false);
+                            rueckgabedatumTextField.setVisible(false);
+                            ausleihdatumLabel.setVisible(false);
+                            ausleihdatumTextField.setVisible(false);
+                            idLabel.setVisible(true);
+                            idTextField.setVisible(true);
+                            loeschen.setVisible(true);
+                            hinzufuegen.setVisible(true);
+                            blank1.setText("                                                                                  ");
+                            blank2.setText("                                                                                                                      ");
                         } catch (ParserConfigurationException ex) {
                             throw new RuntimeException(ex);
                         } catch (IOException ex) {
@@ -194,15 +228,27 @@ public class GUI extends JFrame {
                             error.setText("");
                             BootRepository bootRepository = new BootRepository();
                             String id = idTextField.getText();
-                            bootRepository.deleteBootFromList(id);
-                        } catch (Exception ex) {
-                            error.setText(ex.getMessage());
+                            String ausleihDatum = ausleihdatumTextField.getText();
+                            String rueckgabeDatum = rueckgabedatumTextField.getText();
+                            String kundenName = kundennameTextField.getText();
+                            if(!ausleihDatum.isEmpty() && !rueckgabeDatum.isEmpty() && !kundenName.isEmpty()){
+                            bootRepository.deleteRentedBootFromList(id);
+                        }else {
+                            try {
+                                bootRepository.deleteBootFromList(id);
+                            } catch (Exception ex) {
+                                error.setText(ex.getMessage());
+                            }
                         }
+                    } catch (Exception ex) {
+                        error.setText(ex.getMessage());
                     }
+                }
                 });
             }
         });
     }
+
 
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
         GUI gui = new GUI();
