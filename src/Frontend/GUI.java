@@ -171,7 +171,8 @@ public class GUI extends JFrame {
                             idTextField.setVisible(true);
                             loeschen.setVisible(true);
                             hinzufuegen.setVisible(true);
-                            blank1.setText("                                ");
+                            blank1.setText("                                                                                  ");
+                            blank2.setText("                                                                                                                      ");
                         } catch (ParserConfigurationException ex) {
                             throw new RuntimeException(ex);
                         } catch (IOException ex) {
