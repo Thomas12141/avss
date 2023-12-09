@@ -27,8 +27,12 @@ public class Server {
         while (true){
             ServerSocket serverSocket;
             try {
+                System.out.println("Server Listening.");
+                log.info("Server Listening.");
                 serverSocket = new ServerSocket(port);
                 Socket clientSocket = serverSocket.accept();
+                System.out.println("connection Established.");
+                log.info("connection Established.");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
                 log.severe(e.getMessage());
