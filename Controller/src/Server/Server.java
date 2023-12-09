@@ -1,9 +1,10 @@
 package Server;
 
+import com.sun.net.httpserver.HttpServer;
+
 import java.io.File;
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.InetSocketAddress;
 import java.util.logging.*;
 
 public class Server {
@@ -24,19 +25,10 @@ public class Server {
         fileHandler.setLevel(Level.INFO);
         fileHandler.setFormatter(new SimpleFormatter());
         log.addHandler(fileHandler);
-        while (true){
-            ServerSocket serverSocket;
-            try {
-                System.out.println("Server Listening.");
-                log.info("Server Listening.");
-                serverSocket = new ServerSocket(port);
-                Socket clientSocket = serverSocket.accept();
-                System.out.println("connection Established.");
-                log.info("connection Established.");
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-                log.severe(e.getMessage());
-            }
-        }
+        HttpServer httpServer = HttpServer.create(new InetSocketAddress("localhost", port), 0);
+        //TODO: Implement HTTTPHandler.
+        //httpServer.createContext("/boot", OurHttpHandler);
+        httpServer.setExecutor(java.util.concurrent.Executors.newCachedThreadPool());
+        httpServer.start();
     }
 }
