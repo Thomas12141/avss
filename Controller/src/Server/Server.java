@@ -21,6 +21,7 @@ public class Server {
 
     public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException {
         gui = new GUI();
+        gui.setVisible(true);
         LogManager.getLogManager().reset();
         log.setLevel(Level.INFO);
         File serverLog = new File("ServerLog.log");
