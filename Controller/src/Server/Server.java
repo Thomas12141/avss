@@ -1,11 +1,13 @@
 package Server;
 
+import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.logging.*;
+import Handler.BootHandler;
 
 public class Server {
     private final static Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -27,7 +29,8 @@ public class Server {
         log.addHandler(fileHandler);
         HttpServer httpServer = HttpServer.create(new InetSocketAddress("localhost", port), 0);
         //TODO: Implement HTTTPHandler.
-        //httpServer.createContext("/boot", OurHttpHandler);
+        //HttpHandler BootHandler = null;
+        //httpServer.createContext("/boot", BootHandler);
         httpServer.setExecutor(java.util.concurrent.Executors.newCachedThreadPool());
         httpServer.start();
     }
