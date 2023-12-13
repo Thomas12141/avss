@@ -19,9 +19,7 @@ public class Server {
     static GUI gui;
 
 
-    public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException {
-        gui = new GUI();
-        gui.setVisible(true);
+    public static void main(String[] args) throws IOException{
         LogManager.getLogManager().reset();
         log.setLevel(Level.INFO);
         File serverLog = new File("ServerLog.log");
@@ -35,8 +33,25 @@ public class Server {
         fileHandler.setLevel(Level.INFO);
         fileHandler.setFormatter(new SimpleFormatter());
         log.addHandler(fileHandler);
+
+        new Thread(new Runnable(){
+
+            @Override
+            public void run() {
+
+                try {
+                    gui = new GUI();
+                } catch (ParserConfigurationException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } catch (SAXException e) {
+                    throw new RuntimeException(e);
+                }
+                gui.setVisible(true);
+            }
+        }).start();
         HttpServer httpServer = HttpServer.create(new InetSocketAddress("localhost", port), 0);
-        //TODO: Implement HTTTPHandler.
         //HttpHandler BootHandler = null;
         //httpServer.createContext("/boot", BootHandler);
         httpServer.setExecutor(java.util.concurrent.Executors.newCachedThreadPool());
