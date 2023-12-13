@@ -7,7 +7,6 @@ import Logic.BootRepository;
 
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,8 +15,14 @@ import java.util.ArrayList;
 
 
 public class GUI extends JFrame {
+    private static GUI thisGUI;
+    private JButton list1;
+    private JButton list2;
+    private int inWhichList;
     public GUI() throws ParserConfigurationException, IOException, SAXException {
         super("Verleih");
+        thisGUI = this;
+        this.inWhichList = 0;
         this.setSize(1024,576);
         this.setLayout(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -33,11 +38,11 @@ public class GUI extends JFrame {
         scrollPane.setPreferredSize(new Dimension(1004, 400));
 
 
-        JButton list1 = new JButton("Verliehene Boote");
-        this.add(list1);
+        this.list1 = new JButton("Verliehene Boote");
+        this.add(this.list1);
 
-        JButton list2 = new JButton("Verfügbare Boote");
-        this.add(list2);
+        this.list2 = new JButton("Verfügbare Boote");
+        this.add(this.list2);
 
         this.setLayout(new FlowLayout());
         this.add(scrollPane);
@@ -109,9 +114,10 @@ public class GUI extends JFrame {
         JLabel error = new JLabel("");
         error.setForeground(Color.red);
         this.add(error);
-        list1.addActionListener(new ActionListener() {
+        this.list1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                inWhichList = 1;
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
@@ -147,9 +153,10 @@ public class GUI extends JFrame {
             }
         });
 
-        list2.addActionListener(new ActionListener() {
+        this.list2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                inWhichList = 2;
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
@@ -249,6 +256,19 @@ public class GUI extends JFrame {
         });
     }
 
+    public void refresh(){
+        if(inWhichList == 0){
+            return;
+        }else if(inWhichList == 1){
+            list1.doClick();
+        }else {
+            list2.doClick();
+        }
+    }
+
+    public static GUI getThisGUI() {
+        return thisGUI;
+    }
 
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
         GUI gui = new GUI();

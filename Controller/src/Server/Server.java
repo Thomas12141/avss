@@ -1,19 +1,27 @@
 package Server;
 
-import com.sun.net.httpserver.HttpHandler;
+import Frontend.GUI;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.logging.*;
-import Handler.BootHandler;
+
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 public class Server {
     private final static Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final static int port = 5000;
-    public static void main(String[] args) throws IOException {
 
+    static GUI gui;
+
+
+    public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException {
+        GUI.main(new String[]{});
+        gui = GUI.getThisGUI();
         LogManager.getLogManager().reset();
         log.setLevel(Level.INFO);
         File serverLog = new File("ServerLog.log");

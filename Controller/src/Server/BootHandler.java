@@ -1,11 +1,9 @@
-package Handler;
+package Server;
 
 import Logic.BootRepository;
-import Logic.NichtVerlieheneBoote;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.xml.sax.SAXException;
-import com.google.gson.Gson;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -23,6 +21,7 @@ public class BootHandler implements HttpHandler {
             case "DELETE":
                 try {
                     handleDeleteRequest(exchange);
+                    Server.gui.refresh();
                 } catch (ParserConfigurationException e) {
                     throw new RuntimeException(e);
                 } catch (TransformerException e) {
@@ -34,6 +33,7 @@ public class BootHandler implements HttpHandler {
             case "POST":
                 try {
                     handlePostRequest(exchange);
+                    Server.gui.refresh();
                 } catch (ParserConfigurationException e) {
                     throw new RuntimeException(e);
                 } catch (TransformerException e) {
