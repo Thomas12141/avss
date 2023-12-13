@@ -20,8 +20,7 @@ public class Server {
 
 
     public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException {
-        GUI.main(new String[]{});
-        gui = GUI.getThisGUI();
+        gui = new GUI();
         LogManager.getLogManager().reset();
         log.setLevel(Level.INFO);
         File serverLog = new File("ServerLog.log");

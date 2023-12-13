@@ -15,13 +15,11 @@ import java.util.ArrayList;
 
 
 public class GUI extends JFrame {
-    private static GUI thisGUI;
     private JButton list1;
     private JButton list2;
     private int inWhichList;
     public GUI() throws ParserConfigurationException, IOException, SAXException {
         super("Verleih");
-        thisGUI = this;
         this.inWhichList = 0;
         this.setSize(1024,576);
         this.setLayout(null);
@@ -264,15 +262,5 @@ public class GUI extends JFrame {
         }else {
             list2.doClick();
         }
-    }
-
-    public static GUI getThisGUI() {
-        return thisGUI;
-    }
-
-    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
-        GUI gui = new GUI();
-        gui.setVisible(true);
-
     }
 }

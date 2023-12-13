@@ -21,7 +21,7 @@ public class BootHandler implements HttpHandler {
             case "DELETE":
                 try {
                     handleDeleteRequest(exchange);
-                    Server.gui.refresh();
+                    if(Server.gui!=null) Server.gui.refresh();
                 } catch (ParserConfigurationException e) {
                     throw new RuntimeException(e);
                 } catch (TransformerException e) {
@@ -33,7 +33,7 @@ public class BootHandler implements HttpHandler {
             case "POST":
                 try {
                     handlePostRequest(exchange);
-                    Server.gui.refresh();
+                    if(Server.gui!=null) Server.gui.refresh();
                 } catch (ParserConfigurationException e) {
                     throw new RuntimeException(e);
                 } catch (TransformerException e) {
