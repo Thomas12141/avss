@@ -54,7 +54,7 @@ public class BootHandler implements HttpHandler {
         InputStream requestBody = exchange.getRequestBody();
         BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
         String requestBodyString = reader.lines().collect(Collectors.joining());
-
+        String id = getIdFromBody(requestBodyString);
         try {
             //TODO
             //NichtVerlieheneBoote newBoot = fromJson(requestBodyString, NichtVerlieheneBoote.class);
@@ -108,4 +108,18 @@ public class BootHandler implements HttpHandler {
         return gson.fromJson(json, clazz);
     }
 
+    private static String getIdFromBody(String body){
+        StringBuilder id = new StringBuilder();
+        int position = body.toLowerCase().indexOf("id");
+        while (position<body.length()){
+            char temp = body.charAt(position);
+            if(temp>=48&&temp<=57){
+                id.append(temp);
+            }else if(!id.isEmpty()){
+                break;
+            }
+            position++;
+        }
+        return id.toString();
+    }
 }
