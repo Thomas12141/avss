@@ -20,10 +20,11 @@ public class BootHandler implements HttpHandler {
         InputStream requestBody = exchange.getRequestBody();
         BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
         String requestBodyString = reader.lines().collect(Collectors.joining());
+System.out.println(requestBodyString);
 
         if(requestBodyString.toLowerCase().contains("add")){
             try {
-                handlePostRequest(exchange);
+                handlePostRequest(requestBodyString,exchange);
                 if(Server.gui!=null) Server.gui.refresh();
             } catch (ParserConfigurationException e) {
                 throw new RuntimeException(e);
@@ -34,7 +35,7 @@ public class BootHandler implements HttpHandler {
             }
         }else if(requestBodyString.toLowerCase().contains("delete")){
             try {
-                handleDeleteRequest(exchange);
+                handleDeleteRequest(requestBodyString,exchange);
                 if(Server.gui!=null) Server.gui.refresh();
             } catch (ParserConfigurationException e) {
                 throw new RuntimeException(e);
@@ -49,11 +50,7 @@ public class BootHandler implements HttpHandler {
     }
 
     //POST-Request: addNewBootToList
-    private void handlePostRequest(HttpExchange exchange) throws IOException, ParserConfigurationException, TransformerException, SAXException {
-
-        InputStream requestBody = exchange.getRequestBody();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
-        String requestBodyString = reader.lines().collect(Collectors.joining());
+    private void handlePostRequest(String requestBodyString, HttpExchange exchange) throws IOException, ParserConfigurationException, TransformerException, SAXException {
         String id = getIdFromBody(requestBodyString);
         try {
             //TODO
@@ -70,10 +67,8 @@ public class BootHandler implements HttpHandler {
     }
 
     //DELETE-Request: deleteBootFromList; ID in URL
-    private void handleDeleteRequest(HttpExchange exchange) throws IOException, ParserConfigurationException, TransformerException, SAXException {
-        InputStream requestBody = exchange.getRequestBody();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
-        String requestBodyString = reader.lines().collect(Collectors.joining());
+    private void handleDeleteRequest(String requestBodyString,HttpExchange exchange) throws IOException, ParserConfigurationException, TransformerException, SAXException {
+
         String id = getIdFromBody(requestBodyString);
 
         try {

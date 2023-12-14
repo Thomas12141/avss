@@ -1,6 +1,7 @@
 package Server;
 
 import Frontend.GUI;
+import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.File;
@@ -52,6 +53,8 @@ public class Server {
             }
         }).start();
         HttpServer httpServer = HttpServer.create(new InetSocketAddress("localhost", port), 0);
+        HttpHandler BootHandler = new BootHandler();
+        httpServer.createContext("/",BootHandler);
         //HttpHandler BootHandler = null;
         //httpServer.createContext("/boot", BootHandler);
         httpServer.setExecutor(java.util.concurrent.Executors.newCachedThreadPool());
