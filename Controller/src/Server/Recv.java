@@ -23,8 +23,11 @@ public class Recv implements AutoCloseable  {
         factory.setVirtualHost("PG3-T1");
         this.connection = factory.newConnection();
         this.channel = connection.createChannel();
-        //TODO: change to exchange
-        channel.queueDeclare(addedSchiff, false, false, false, null);
+
+
+        channel.exchangeDeclare(addedSchiff, "fanout");
+        String queueName = channel.queueDeclare().getQueue();
+        channel.queueBind(queueName, addedSchiff, "");
         DeliverCallback deliverCallback1 = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), "UTF-8");
 
@@ -40,9 +43,12 @@ public class Recv implements AutoCloseable  {
                 throw new RuntimeException(e);
             }
         };
-        channel.basicConsume(addedSchiff, true, deliverCallback1, consumerTag -> { });
-        //TODO: change to exchange
-        channel.queueDeclare(removedSchiff, false, false, false, null);
+        channel.basicConsume(queueName, true, deliverCallback1, consumerTag -> { });
+
+
+        channel.exchangeDeclare(removedSchiff, "fanout");
+        queueName = channel.queueDeclare().getQueue();
+        channel.queueBind(queueName, removedSchiff, "");
         DeliverCallback deliverCallback2 = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), "UTF-8");
             BootRepository repository = new BootRepository();
@@ -59,7 +65,7 @@ public class Recv implements AutoCloseable  {
                 throw new RuntimeException(e);
             }
         };
-        channel.basicConsume(removedSchiff, true, deliverCallback2, consumerTag -> { });
+        channel.basicConsume(queueName, true, deliverCallback2, consumerTag -> { });
     }
 
     @Override
