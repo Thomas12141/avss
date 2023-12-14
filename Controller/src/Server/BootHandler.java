@@ -16,35 +16,35 @@ public class BootHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         String requestMethod = exchange.getRequestMethod();
+        InputStream is = exchange.getRequestBody();
+        InputStream requestBody = exchange.getRequestBody();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
+        String requestBodyString = reader.lines().collect(Collectors.joining());
 
-        switch (requestMethod) {
-            case "DELETE":
-                try {
-                    handleDeleteRequest(exchange);
-                    if(Server.gui!=null) Server.gui.refresh();
-                } catch (ParserConfigurationException e) {
-                    throw new RuntimeException(e);
-                } catch (TransformerException e) {
-                    throw new RuntimeException(e);
-                } catch (SAXException e) {
-                    throw new RuntimeException(e);
-                }
-                break;
-            case "POST":
-                try {
-                    handlePostRequest(exchange);
-                    if(Server.gui!=null) Server.gui.refresh();
-                } catch (ParserConfigurationException e) {
-                    throw new RuntimeException(e);
-                } catch (TransformerException e) {
-                    throw new RuntimeException(e);
-                } catch (SAXException e) {
-                    throw new RuntimeException(e);
-                }
-                break;
-            default:
-                exchange.sendResponseHeaders(405, 0);
-                break;
+        if(requestBodyString.toLowerCase().contains("add")){
+            try {
+                handlePostRequest(exchange);
+                if(Server.gui!=null) Server.gui.refresh();
+            } catch (ParserConfigurationException e) {
+                throw new RuntimeException(e);
+            } catch (TransformerException e) {
+                throw new RuntimeException(e);
+            } catch (SAXException e) {
+                throw new RuntimeException(e);
+            }
+        }else if(requestBodyString.toLowerCase().contains("delete")){
+            try {
+                handleDeleteRequest(exchange);
+                if(Server.gui!=null) Server.gui.refresh();
+            } catch (ParserConfigurationException e) {
+                throw new RuntimeException(e);
+            } catch (TransformerException e) {
+                throw new RuntimeException(e);
+            } catch (SAXException e) {
+                throw new RuntimeException(e);
+            }
+        }else {
+            sendResponse(exchange, "", 405);
         }
     }
 
@@ -71,11 +71,10 @@ public class BootHandler implements HttpHandler {
 
     //DELETE-Request: deleteBootFromList; ID in URL
     private void handleDeleteRequest(HttpExchange exchange) throws IOException, ParserConfigurationException, TransformerException, SAXException {
-
-        String requestURI = exchange.getRequestURI().toString();
-        String[] parts = requestURI.split("/");
-        //Annahme: /xyz/boot/123 -> id = 123
-        String id = parts[parts.length - 1];
+        InputStream requestBody = exchange.getRequestBody();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
+        String requestBodyString = reader.lines().collect(Collectors.joining());
+        String id = getIdFromBody(requestBodyString);
 
         try {
             BootRepository repository = new BootRepository();
@@ -100,13 +99,6 @@ public class BootHandler implements HttpHandler {
         return null;
     }
 
-    private <T> T fromJson(String json, Class<T> clazz) {
-        if (json == null || json.isEmpty()) {
-            throw new IllegalArgumentException("Json string is null or empty");
-        }
-        Gson gson = new Gson();
-        return gson.fromJson(json, clazz);
-    }
 
     private static String getIdFromBody(String body){
         StringBuilder id = new StringBuilder();

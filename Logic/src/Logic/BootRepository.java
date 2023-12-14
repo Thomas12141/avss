@@ -20,7 +20,7 @@ public class BootRepository{
     private static String numberPattern = "[1-9][0-9]*";
     private static String namePattern = "[a-zA-Z[ ]*]+";
 
-    public ArrayList<VerlieheneBoote> getAllRented() throws ParserConfigurationException, IOException, SAXException {
+    public synchronized ArrayList<VerlieheneBoote> getAllRented() throws ParserConfigurationException, IOException, SAXException {
         ArrayList<VerlieheneBoote> boats = convertToRentedBoats(DataList1.getAllElements());
         ArrayList<VerlieheneBoote> result = new ArrayList<>();
         for (VerlieheneBoote boat: boats) {
@@ -31,7 +31,7 @@ public class BootRepository{
         return result;
     }
 
-    public ArrayList<NichtVerlieheneBoote> getAllNotRented() throws ParserConfigurationException, IOException, SAXException {
+    public synchronized ArrayList<NichtVerlieheneBoote> getAllNotRented() throws ParserConfigurationException, IOException, SAXException {
         ArrayList<NichtVerlieheneBoote> boats = convertToNotRentedBoats(DataList2.getAllElements());
         ArrayList<NichtVerlieheneBoote> result = new ArrayList<>();
         for (NichtVerlieheneBoote boat: boats) {
@@ -41,7 +41,7 @@ public class BootRepository{
         }
         return result;
     }
-    public void addNewBootToList(String id) throws ParserConfigurationException, IOException, TransformerException, SAXException {
+    public synchronized void addNewBootToList(String id) throws ParserConfigurationException, IOException, TransformerException, SAXException {
 
         if(!Pattern.compile(numberPattern).matcher(id).matches()) throw new NullPointerException("Boat object is missing required information.");
 
@@ -50,7 +50,7 @@ public class BootRepository{
         DataList2.addNewElement(id);
     }
 
-    public boolean idExists(String id) throws ParserConfigurationException, IOException, SAXException {
+    public synchronized boolean idExists(String id) throws ParserConfigurationException, IOException, SAXException {
 
         ArrayList<NichtVerlieheneBoote> nichtVerlieheneBooteArrayList = convertToNotRentedBoats(DataList2.getAllElements());
 
