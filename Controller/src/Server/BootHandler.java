@@ -20,7 +20,6 @@ public class BootHandler implements HttpHandler {
         InputStream requestBody = exchange.getRequestBody();
         BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
         String requestBodyString = reader.lines().collect(Collectors.joining());
-System.out.println(requestBodyString);
 
         if(requestBodyString.toLowerCase().contains("add")){
             try {

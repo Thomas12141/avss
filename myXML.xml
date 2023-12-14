@@ -152,4 +152,10 @@
     <NichtVerlieheneBoot ID="8">
         <Verliehen>nein</Verliehen>
     </NichtVerlieheneBoot>
+    <NichtVerlieheneBoot ID="9">
+        <Verliehen>nein</Verliehen>
+    </NichtVerlieheneBoot>
+    <NichtVerlieheneBoot ID="10">
+        <Verliehen>nein</Verliehen>
+    </NichtVerlieheneBoot>
 </Boote>

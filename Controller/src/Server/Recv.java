@@ -23,6 +23,7 @@ public class Recv implements AutoCloseable  {
         factory.setVirtualHost("PG3-T1");
         this.connection = factory.newConnection();
         this.channel = connection.createChannel();
+        //TODO: change to exchange
         channel.queueDeclare(addedSchiff, false, false, false, null);
         DeliverCallback deliverCallback1 = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), "UTF-8");
@@ -39,7 +40,7 @@ public class Recv implements AutoCloseable  {
             }
         };
         channel.basicConsume(addedSchiff, true, deliverCallback1, consumerTag -> { });
-
+        //TODO: change to exchange
         channel.queueDeclare(removedSchiff, false, false, false, null);
         DeliverCallback deliverCallback2 = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), "UTF-8");
