@@ -42,7 +42,7 @@ public class BootRepository{
         return result;
     }
     public synchronized void addNewBootToList(String id) throws ParserConfigurationException, IOException, TransformerException, SAXException {
-
+        System.out.println(id);
         if(!Pattern.compile(numberPattern).matcher(id).matches()) throw new NullPointerException("Boat object is missing required information.");
 
         if(idExists(id)) throw new IllegalArgumentException("ID already exists. Please choose a different ID.");

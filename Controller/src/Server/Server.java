@@ -13,6 +13,9 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import com.rabbitmq.client.*;
+
+
 public class Server {
     private final static Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final static int port = 5000;

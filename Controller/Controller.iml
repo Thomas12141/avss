@@ -10,5 +10,6 @@
     <orderEntry type="module" module-name="Logic" />
     <orderEntry type="library" name="google.code.gson" level="project" />
     <orderEntry type="module" module-name="Frontend" />
+    <orderEntry type="library" name="amqp-client-5.16.0" level="application" />
   </component>
 </module>
