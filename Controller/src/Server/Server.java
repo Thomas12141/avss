@@ -7,6 +7,7 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.concurrent.TimeoutException;
 import java.util.logging.*;
 
 import org.xml.sax.SAXException;
@@ -22,6 +23,7 @@ public class Server {
 
     static GUI gui;
 
+    static Recv recv;
 
     public static void main(String[] args) throws IOException{
         LogManager.getLogManager().reset();
@@ -55,11 +57,23 @@ public class Server {
                 gui.setVisible(true);
             }
         }).start();
+        new Thread(new Runnable(){
+
+            @Override
+            public void run() {
+
+                try {
+                    recv = new Recv();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } catch (TimeoutException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
         HttpServer httpServer = HttpServer.create(new InetSocketAddress("localhost", port), 0);
         HttpHandler BootHandler = new BootHandler();
         httpServer.createContext("/",BootHandler);
-        //HttpHandler BootHandler = null;
-        //httpServer.createContext("/boot", BootHandler);
         httpServer.setExecutor(java.util.concurrent.Executors.newCachedThreadPool());
         httpServer.start();
     }

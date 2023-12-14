@@ -31,6 +31,7 @@ public class Recv implements AutoCloseable  {
             BootRepository repository = new BootRepository();
             try {
                 repository.addNewBootToList(getIdFromMessage(message));
+                Server.gui.refresh();
             } catch (ParserConfigurationException e) {
                 throw new RuntimeException(e);
             } catch (TransformerException e) {
@@ -47,6 +48,7 @@ public class Recv implements AutoCloseable  {
             BootRepository repository = new BootRepository();
             try {
                 repository.deleteBootFromList(getIdFromMessage(message));
+                Server.gui.refresh();
             } catch (ParserConfigurationException e) {
                 throw new RuntimeException(e);
             } catch (TransformerException e) {
@@ -82,8 +84,5 @@ public class Recv implements AutoCloseable  {
             position++;
         }
         return id.toString();
-    }
-    public static void main(String[] args) throws IOException, TimeoutException {
-        Recv recv = new Recv();
     }
 }
