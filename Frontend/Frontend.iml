@@ -10,5 +10,6 @@
     <orderEntry type="library" name="artifacts" level="project" />
     <orderEntry type="library" name="AbgabeOrdner" level="project" />
     <orderEntry type="module" module-name="Logic" />
+    <orderEntry type="library" name="slf4j-api-1.7.36" level="application" />
   </component>
 </module>
