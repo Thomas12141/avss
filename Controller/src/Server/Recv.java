@@ -1,5 +1,6 @@
 package Server;
 
+import Frontend.GUI;
 import Logic.BootRepository;
 import com.rabbitmq.client.*;
 import org.xml.sax.SAXException;
@@ -10,9 +11,10 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 public class Recv implements AutoCloseable  {
-    Connection connection;
-    Channel channel;
-    public Recv() throws IOException, TimeoutException {
+    private Connection connection;
+    private Channel channel;
+
+    public Recv(GUI gui) throws IOException, TimeoutException {
         String addedSchiff = "AddedSchiff";
         String removedSchiff = "RemovedSchiff";
         ConnectionFactory factory = new ConnectionFactory();
@@ -34,7 +36,7 @@ public class Recv implements AutoCloseable  {
             BootRepository repository = new BootRepository();
             try {
                 repository.addNewBootToList(getIdFromMessage(message));
-                Server.gui.refresh();
+                if(gui!=null) gui.refresh();
             } catch (ParserConfigurationException e) {
                 throw new RuntimeException(e);
             } catch (TransformerException e) {
@@ -54,7 +56,7 @@ public class Recv implements AutoCloseable  {
             BootRepository repository = new BootRepository();
             try {
                 repository.deleteBootFromList(getIdFromMessage(message));
-                Server.gui.refresh();
+                if(gui!=null) gui.refresh();
             } catch (ParserConfigurationException e) {
                 throw new RuntimeException(e);
             } catch (TransformerException e) {

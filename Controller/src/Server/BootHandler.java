@@ -1,5 +1,6 @@
 package Server;
 
+import Frontend.GUI;
 import Logic.BootRepository;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -12,7 +13,10 @@ import java.util.stream.Collectors;
 
 
 public class BootHandler implements HttpHandler {
-
+    private GUI gui;
+    public BootHandler(GUI gui){
+        this.gui = gui;
+    }
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         String requestMethod = exchange.getRequestMethod();
@@ -24,7 +28,7 @@ public class BootHandler implements HttpHandler {
         if(requestBodyString.toLowerCase().contains("add")){
             try {
                 handlePostRequest(requestBodyString,exchange);
-                if(Server.gui!=null) Server.gui.refresh();
+                if(gui!=null) gui.refresh();
             } catch (ParserConfigurationException e) {
                 throw new RuntimeException(e);
             } catch (TransformerException e) {
@@ -35,7 +39,7 @@ public class BootHandler implements HttpHandler {
         }else if(requestBodyString.toLowerCase().contains("delete")){
             try {
                 handleDeleteRequest(requestBodyString,exchange);
-                if(Server.gui!=null) Server.gui.refresh();
+                if(gui!=null) gui.refresh();
             } catch (ParserConfigurationException e) {
                 throw new RuntimeException(e);
             } catch (TransformerException e) {
