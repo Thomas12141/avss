@@ -7,6 +7,7 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.*;
 
@@ -14,18 +15,16 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import com.rabbitmq.client.*;
-
 
 public class Server {
     private final static Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final static int port = 5000;
 
-    static GUI gui;
+    private static GUI gui;
 
-    static Recv recv;
+    private static Recv recv;
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException, InterruptedException {
         LogManager.getLogManager().reset();
         log.setLevel(Level.INFO);
         File serverLog = new File("ServerLog.log");
@@ -39,7 +38,7 @@ public class Server {
         fileHandler.setLevel(Level.INFO);
         fileHandler.setFormatter(new SimpleFormatter());
         log.addHandler(fileHandler);
-
+        CountDownLatch countDownLatch = new CountDownLatch(1);
         new Thread(new Runnable(){
 
             @Override
@@ -47,6 +46,7 @@ public class Server {
 
                 try {
                     gui = new GUI();
+                    countDownLatch.countDown();
                 } catch (ParserConfigurationException e) {
                     throw new RuntimeException(e);
                 } catch (IOException e) {
@@ -57,13 +57,14 @@ public class Server {
                 gui.setVisible(true);
             }
         }).start();
+        countDownLatch.await();
         new Thread(new Runnable(){
 
             @Override
             public void run() {
 
                 try {
-                    recv = new Recv();
+                    recv = new Recv(gui);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } catch (TimeoutException e) {
@@ -72,7 +73,7 @@ public class Server {
             }
         }).start();
         HttpServer httpServer = HttpServer.create(new InetSocketAddress("localhost", port), 0);
-        HttpHandler BootHandler = new BootHandler();
+        HttpHandler BootHandler = new BootHandler(gui);
         httpServer.createContext("/",BootHandler);
         httpServer.setExecutor(java.util.concurrent.Executors.newCachedThreadPool());
         httpServer.start();
