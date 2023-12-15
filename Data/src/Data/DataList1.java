@@ -76,7 +76,8 @@ public class DataList1 {
                 bootElement.getParentNode().removeChild(bootElement);
 
                 DOMSource domSource = new DOMSource(document);
-                Transformer transformer = TransformerFactory.newInstance().newTransformer();
+                Source xslt = new StreamSource(new File("Style.xsl"));
+                Transformer transformer = TransformerFactory.newInstance().newTransformer(xslt);
                 transformer.setOutputProperty(OutputKeys.INDENT, "yes");
                 StreamResult result = new StreamResult(xmlFile);
                 transformer.transform(domSource, result);
