@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 public class BootHandler implements HttpHandler {
     private GUI gui;
+
     public BootHandler(GUI gui){
         this.gui = gui;
     }
@@ -52,24 +53,23 @@ public class BootHandler implements HttpHandler {
         }
     }
 
-    //POST-Request: addNewBootToList
     private void handlePostRequest(String requestBodyString, HttpExchange exchange) throws IOException, ParserConfigurationException, TransformerException, SAXException {
+
         String id = getIdFromBody(requestBodyString);
+
         try {
-            //TODO
-            //NichtVerlieheneBoote newBoot = fromJson(requestBodyString, NichtVerlieheneBoote.class);
-            //String id = newBoot.getId();
             BootRepository repository = new BootRepository();
             repository.addNewBootToList(id);
+            Server.log.info("Boat successfully added.");
+            System.out.println("Boat successfully added.");
+            sendResponse(exchange, "Boot erfolgreich hinzugefügt", 201);
 
-            String response = "Boot erfolgreich hinzugefügt";
-            sendResponse(exchange, response, 201);
         } catch (Exception e) {
+            Server.log.severe(e.getMessage());
             sendResponse(exchange, e.getMessage(), 400);
         }
     }
 
-    //DELETE-Request: deleteBootFromList; ID in URL
     private void handleDeleteRequest(String requestBodyString,HttpExchange exchange) throws IOException, ParserConfigurationException, TransformerException, SAXException {
 
         String id = getIdFromBody(requestBodyString);
@@ -77,9 +77,12 @@ public class BootHandler implements HttpHandler {
         try {
             BootRepository repository = new BootRepository();
             repository.deleteBootFromList(id);
-
+            Server.log.info("Boat successfully deleted.");
+            System.out.println("Boat successfully deleted.");
             sendResponse(exchange, "Boot erfolgreich gelöscht", 200);
+
         } catch (Exception e) {
+            Server.log.severe(e.getMessage());
             sendResponse(exchange, e.getMessage(), 500);
         }
     }
@@ -90,11 +93,6 @@ public class BootHandler implements HttpHandler {
         try (OutputStream os = exchange.getResponseBody()) {
             os.write(response.getBytes());
         }
-    }
-
-    private static String toJson(Object obj) {
-
-        return null;
     }
 
 

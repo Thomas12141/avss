@@ -1,6 +1,7 @@
 package Server;
 
 import Frontend.GUI;
+import RabbitMQ.Recv;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
@@ -17,7 +18,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 
 public class Server {
-    private final static Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    final static Logger log = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final static int port = 5000;
 
     private static GUI gui;
@@ -38,6 +39,7 @@ public class Server {
         fileHandler.setLevel(Level.INFO);
         fileHandler.setFormatter(new SimpleFormatter());
         log.addHandler(fileHandler);
+
         CountDownLatch countDownLatch = new CountDownLatch(1);
         new Thread(new Runnable(){
 
@@ -76,6 +78,7 @@ public class Server {
         HttpHandler BootHandler = new BootHandler(gui);
         httpServer.createContext("/",BootHandler);
         httpServer.setExecutor(java.util.concurrent.Executors.newCachedThreadPool());
+        log.info("Server is listening on port " + port + "...");
         httpServer.start();
     }
 }

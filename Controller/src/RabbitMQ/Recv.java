@@ -1,4 +1,4 @@
-package Server;
+package RabbitMQ;
 
 import Frontend.GUI;
 import Logic.BootRepository;
@@ -32,6 +32,7 @@ public class Recv implements AutoCloseable  {
         channel.queueBind(queueName, addedSchiff, "");
         DeliverCallback deliverCallback1 = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), "UTF-8");
+            MessageLogger.LogMessage(message);
 
             BootRepository repository = new BootRepository();
             try {
@@ -53,6 +54,8 @@ public class Recv implements AutoCloseable  {
         channel.queueBind(queueName, removedSchiff, "");
         DeliverCallback deliverCallback2 = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), "UTF-8");
+            MessageLogger.LogMessage(message);
+
             BootRepository repository = new BootRepository();
             try {
                 repository.deleteBootFromList(getIdFromMessage(message));
