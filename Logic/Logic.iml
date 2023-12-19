@@ -7,9 +7,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="artifacts" level="project" />
-    <orderEntry type="library" name="AbgabeOrdner" level="project" />
     <orderEntry type="module" module-name="Data" />
-    <orderEntry type="library" name="slf4j-api-1.7.36" level="application" />
   </component>
 </module>
