@@ -42,6 +42,7 @@ public class BootRepository{
         return result;
     }
     public synchronized void addNewBootToList(String id) throws ParserConfigurationException, IOException, TransformerException, SAXException {
+
         if(!Pattern.compile(numberPattern).matcher(id).matches()) throw new NullPointerException("Boat object is missing required information.");
 
         if(idExists(id)) throw new IllegalArgumentException("ID already exists. Please choose a different ID.");
@@ -69,7 +70,7 @@ public class BootRepository{
         return false;
     }
 
-    public boolean isValidDateFormat(String ausleihdatumStr, String rueckgabedatumStr){
+    public synchronized boolean isValidDateFormat(String ausleihdatumStr, String rueckgabedatumStr){
         try {
             LocalDate.parse(ausleihdatumStr, formatter);
             LocalDate.parse(rueckgabedatumStr, formatter);
@@ -79,14 +80,14 @@ public class BootRepository{
         }
     }
 
-    public boolean checkAusleihdatumKleinerRueckgabedatum(LocalDate ausleihdatum, LocalDate rueckgabedatum){
+    public synchronized boolean checkAusleihdatumKleinerRueckgabedatum(LocalDate ausleihdatum, LocalDate rueckgabedatum){
         if(ausleihdatum.isAfter(rueckgabedatum)){
             return false;
         }
         return true;
     }
 
-    public void addBootToList(String id, String ausleihdatumStr, String rueckgabedatumStr, String kundennname) throws Exception {
+    public synchronized void addBootToList(String id, String ausleihdatumStr, String rueckgabedatumStr, String kundennname) throws Exception {
 
         if(!Pattern.compile(numberPattern).matcher(id).matches()) throw new NullPointerException("Boat object is missing required information.");
 
@@ -103,7 +104,7 @@ public class BootRepository{
         DataList1.addNewElement(id, ausleihdatumStr, rueckgabedatumStr, kundennname);
     }
 
-    public void deleteBootFromList(String id) throws ParserConfigurationException, IOException, TransformerException, SAXException, IllegalAccessException {
+    public synchronized void deleteBootFromList(String id) throws ParserConfigurationException, IOException, TransformerException, SAXException, IllegalAccessException {
         ArrayList<NichtVerlieheneBoote> notRentedBoatsboats = convertToNotRentedBoats(DataList2.getAllElements());
         NichtVerlieheneBoote notRentedBoat = null;
         for (NichtVerlieheneBoote toPick:notRentedBoatsboats) {
@@ -121,7 +122,7 @@ public class BootRepository{
         DataList2.deleteNotRentedElement(id);
     }
 
-    public void deleteRentedBootFromList(String id) throws ParserConfigurationException, IOException, TransformerException, SAXException, IllegalAccessException {
+    public synchronized void deleteRentedBootFromList(String id) throws ParserConfigurationException, IOException, TransformerException, SAXException, IllegalAccessException {
         ArrayList<VerlieheneBoote> rentedBoatsboats = convertToRentedBoats(DataList1.getAllElements());
         VerlieheneBoote rentedBoat = null;
         for (VerlieheneBoote toPick: rentedBoatsboats) {
@@ -146,7 +147,7 @@ public class BootRepository{
         DataList1.getAllElements();
     }
 
-    private ArrayList<NichtVerlieheneBoote> convertToNotRentedBoats(ArrayList<String> strings){
+    private synchronized ArrayList<NichtVerlieheneBoote> convertToNotRentedBoats(ArrayList<String> strings){
 
         ArrayList<NichtVerlieheneBoote> boats = new ArrayList<>();
         for (String string: strings) {
@@ -159,7 +160,7 @@ public class BootRepository{
         return boats;
     }
 
-    private ArrayList<VerlieheneBoote> convertToRentedBoats(ArrayList<String> strings){
+    private synchronized ArrayList<VerlieheneBoote> convertToRentedBoats(ArrayList<String> strings){
 
         ArrayList<VerlieheneBoote> rentedBoats = new ArrayList<>();
         for (String string: strings) {
