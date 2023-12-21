@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Main-Class: Server.Server
+Class-Path: slf4j-simple-1.7.36.jar slf4j-api-1.7.36.jar amqp-client-5.1
+ 6.0.jar
+

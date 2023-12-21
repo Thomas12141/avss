@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact name="Controller:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Controller_jar</output-path>
+    <root id="root">
+      <element id="archive" name="Controller.jar">
+        <element id="module-output" name="Controller" />
+        <element id="module-output" name="Logic" />
+        <element id="module-output" name="Data" />
+      </element>
+      <element id="library" level="project" name="slf4j-simple-1.7.36" />
+    </root>
+  </artifact>
+</component>
