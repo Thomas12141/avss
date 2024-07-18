@@ -131,9 +131,6 @@
         <Rueckgabedatum>10/12/2020</Rueckgabedatum>
         <Kundenname>Inka</Kundenname>
     </VerlieheneBoote>
-    <NichtVerlieheneBoot ID="256">
-        <Verliehen>nein</Verliehen>
-    </NichtVerlieheneBoot>
     <NichtVerlieheneBoot ID="25655">
         <Verliehen>nein</Verliehen>
     </NichtVerlieheneBoot>
@@ -143,7 +140,37 @@
         <Rueckgabedatum>03/02/2012</Rueckgabedatum>
         <Kundenname>Thomas</Kundenname>
     </VerlieheneBoote>
-    <NichtVerlieheneBoot ID="18">
+    <NichtVerlieheneBoot ID="13">
+        <Verliehen>nein</Verliehen>
+    </NichtVerlieheneBoot>
+    <NichtVerlieheneBoot ID="14">
+        <Verliehen>nein</Verliehen>
+    </NichtVerlieheneBoot>
+    <NichtVerlieheneBoot ID="15">
+        <Verliehen>nein</Verliehen>
+    </NichtVerlieheneBoot>
+    <NichtVerlieheneBoot ID="16">
+        <Verliehen>nein</Verliehen>
+    </NichtVerlieheneBoot>
+    <NichtVerlieheneBoot ID="19">
+        <Verliehen>nein</Verliehen>
+    </NichtVerlieheneBoot>
+    <NichtVerlieheneBoot ID="20">
+        <Verliehen>nein</Verliehen>
+    </NichtVerlieheneBoot>
+    <NichtVerlieheneBoot ID="21">
+        <Verliehen>nein</Verliehen>
+    </NichtVerlieheneBoot>
+    <NichtVerlieheneBoot ID="22">
+        <Verliehen>nein</Verliehen>
+    </NichtVerlieheneBoot>
+    <NichtVerlieheneBoot ID="23">
+        <Verliehen>nein</Verliehen>
+    </NichtVerlieheneBoot>
+    <NichtVerlieheneBoot ID="24">
+        <Verliehen>nein</Verliehen>
+    </NichtVerlieheneBoot>
+    <NichtVerlieheneBoot ID="8">
         <Verliehen>nein</Verliehen>
     </NichtVerlieheneBoot>
 </Boote>
